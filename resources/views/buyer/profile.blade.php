@@ -5,11 +5,11 @@
 @section('content')
 <div class="max-w-2xl mx-auto space-y-6">
     <div>
-        <h1 class="font-display text-2xl font-bold text-[#1A241E]">Profil Saya</h1>
-        <p class="text-xs sm:text-sm text-[#76847B] mt-1">Kelola data informasi identitas dan alamat pengantaran pesanan.</p>
+        <h1 class="font-display text-2xl font-bold text-white">Profil Saya</h1>
+        <p class="text-xs sm:text-sm text-emerald-200/90 mt-1 font-medium">Kelola data informasi identitas dan alamat pengantaran pesanan.</p>
     </div>
 
-    <div class="bg-white rounded-3xl border border-[#E5ECE7] p-6 sm:p-8 shadow-subtle space-y-6 text-[#1A241E]">
+    <div class="bg-white rounded-3xl border border-emerald-900/15 p-6 sm:p-8 shadow-xl space-y-6 text-[#1A241E]">
         <div class="flex items-center gap-4 pb-6 border-b border-[#E5ECE7]">
             <img src="{{ $buyer->avatar ?? 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=70' }}" class="w-16 h-16 rounded-2xl object-cover ring-4 ring-[#1F3E2C]/10 shadow-xs">
             <div>

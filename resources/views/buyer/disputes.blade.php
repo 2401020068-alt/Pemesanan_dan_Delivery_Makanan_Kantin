@@ -1,67 +1,67 @@
 @extends('layouts.app')
 
-@section('title', 'Pusat Bantuan & Sengketa')
+@section('title', 'Sengketa & Layanan Bantuan')
 
 @section('content')
 <div class="max-w-6xl mx-auto space-y-6 pb-12">
     <!-- Top Header & Context Banner -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white rounded-3xl border border-[#E5ECE7] p-5 sm:p-6 shadow-subtle">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white/10 backdrop-blur-md rounded-3xl border border-white/15 p-5 sm:p-6 shadow-xl text-white">
         <div class="flex items-center gap-3.5">
-            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#E3ECE6] text-[#1F3E2C] shadow-xs">
+            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/15 text-white shadow-xs">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
             </span>
             <div>
-                <h1 class="font-display text-xl sm:text-2xl font-bold text-[#1A241E]">Pusat Bantuan &amp; Sengketa</h1>
-                <p class="text-xs sm:text-sm text-[#76847B] mt-0.5">Layanan bantuan dan mediasi resmi transaksi antara pembeli, kantin, dan kurir kampus.</p>
+                <h1 class="font-display text-xl sm:text-2xl font-bold text-white">Sengketa &amp; Layanan Bantuan</h1>
+                <p class="text-xs sm:text-sm text-emerald-200/90 mt-0.5">Layanan bantuan dan mediasi resmi transaksi antara pembeli, kantin, dan kurir kampus.</p>
             </div>
         </div>
 
         <!-- Quick Summary Counters -->
         <div class="flex items-center gap-2 self-start sm:self-auto flex-wrap">
-            <div class="bg-[#FAFBF9] border border-[#E5ECE7] rounded-2xl px-3.5 py-2 text-center min-w-[80px]">
-                <span class="text-[10px] uppercase font-bold text-[#76847B] tracking-wider block">Total Laporan</span>
-                <span class="font-display font-extrabold text-sm text-[#1A241E]">{{ $disputes->count() }}</span>
+            <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl px-3.5 py-2 text-center min-w-[80px]">
+                <span class="text-[10px] uppercase font-bold text-emerald-200/80 tracking-wider block">Total Laporan</span>
+                <span class="font-display font-extrabold text-sm text-white">{{ $disputes->count() }}</span>
             </div>
-            <div class="bg-[#FAFBF9] border border-[#E5ECE7] rounded-2xl px-3.5 py-2 text-center min-w-[80px]">
-                <span class="text-[10px] uppercase font-bold text-[#8E7252] tracking-wider block">Dalam Proses</span>
-                <span class="font-display font-extrabold text-sm text-[#8E7252]">{{ $disputes->whereIn('status', ['open', 'review'])->count() }}</span>
+            <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl px-3.5 py-2 text-center min-w-[80px]">
+                <span class="text-[10px] uppercase font-bold text-amber-300 tracking-wider block">Dalam Proses</span>
+                <span class="font-display font-extrabold text-sm text-amber-300">{{ $disputes->whereIn('status', ['open', 'review'])->count() }}</span>
             </div>
-            <div class="bg-[#FAFBF9] border border-[#E5ECE7] rounded-2xl px-3.5 py-2 text-center min-w-[80px]">
-                <span class="text-[10px] uppercase font-bold text-[#1F3E2C] tracking-wider block">Selesai</span>
-                <span class="font-display font-extrabold text-sm text-[#1F3E2C]">{{ $disputes->where('status', 'resolved')->count() }}</span>
+            <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl px-3.5 py-2 text-center min-w-[80px]">
+                <span class="text-[10px] uppercase font-bold text-emerald-300 tracking-wider block">Selesai</span>
+                <span class="font-display font-extrabold text-sm text-emerald-300">{{ $disputes->where('status', 'resolved')->count() }}</span>
             </div>
         </div>
     </div>
 
     <!-- Quick Guarantee Highlights Strip -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-        <div class="bg-white rounded-2xl border border-[#E5ECE7] p-3.5 flex items-center gap-3 shadow-subtle">
-            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#E3ECE6] text-[#1F3E2C]">
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl border border-white/15 p-3.5 flex items-center gap-3 text-white shadow-sm">
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/15 text-emerald-300">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
             </span>
             <div>
-                <h4 class="text-xs font-bold text-[#1A241E]">Mediasi Objektif</h4>
-                <p class="text-[11px] text-[#76847B]">Ditangani langsung oleh admin pengelola kantin</p>
+                <h4 class="text-xs font-bold text-white">Mediasi Objektif</h4>
+                <p class="text-[11px] text-emerald-200/80">Ditangani langsung oleh admin pengelola kantin</p>
             </div>
         </div>
-        <div class="bg-white rounded-2xl border border-[#E5ECE7] p-3.5 flex items-center gap-3 shadow-subtle">
-            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#F6F3EF] text-[#A68A68]">
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl border border-white/15 p-3.5 flex items-center gap-3 text-white shadow-sm">
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/15 text-amber-300">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </span>
             <div>
-                <h4 class="text-xs font-bold text-[#1A241E]">Respon Maks. 1x24 Jam</h4>
-                <p class="text-[11px] text-[#76847B]">Proses investigasi dan solusi cepat</p>
+                <h4 class="text-xs font-bold text-white">Respon Maks. 1x24 Jam</h4>
+                <p class="text-[11px] text-emerald-200/80">Proses investigasi dan solusi cepat</p>
             </div>
         </div>
-        <div class="bg-white rounded-2xl border border-[#E5ECE7] p-3.5 flex items-center gap-3 shadow-subtle">
-            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#F1F5F2] text-[#3F6E52]">
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl border border-white/15 p-3.5 flex items-center gap-3 text-white shadow-sm">
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/15 text-teal-300">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
             </span>
             <div>
-                <h4 class="text-xs font-bold text-[#1A241E]">Garansi Transaksi</h4>
-                <p class="text-[11px] text-[#76847B]">Kompensasi jika terjadi kelalaian layanan</p>
+                <h4 class="text-xs font-bold text-white">Garansi Transaksi</h4>
+                <p class="text-[11px] text-emerald-200/80">Kompensasi jika terjadi kelalaian layanan</p>
             </div>
         </div>
     </div>
@@ -70,7 +70,7 @@
     <div class="grid gap-6 lg:grid-cols-12 items-start">
 
         <!-- Left Column: Form Ajukan Keluhan Baru (lg:col-span-5) -->
-        <div class="lg:col-span-5 bg-white rounded-3xl border border-[#E5ECE7] p-6 shadow-subtle space-y-5">
+        <div class="lg:col-span-5 bg-white rounded-3xl border border-emerald-900/15 p-6 shadow-xl space-y-5 text-[#1A241E]">
             <div class="flex items-center gap-2.5 pb-3 border-b border-[#E5ECE7]">
                 <span class="flex h-8 w-8 items-center justify-center rounded-xl bg-[#FDF3F3] text-[#C25454]">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
@@ -175,10 +175,10 @@
         <div class="lg:col-span-7 space-y-4">
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="font-display font-bold text-base sm:text-lg text-[#1A241E]">Riwayat Sengketa Saya</h2>
-                    <p class="text-xs text-[#76847B]">Pantau penanganan dan tanggapan admin atas keluhan Anda</p>
+                    <h2 class="font-display font-bold text-base sm:text-lg text-white">Riwayat Sengketa Saya</h2>
+                    <p class="text-xs text-emerald-200/90">Pantau penanganan dan tanggapan admin atas keluhan Anda</p>
                 </div>
-                <span class="text-xs font-semibold text-[#1F3E2C] bg-[#E3ECE6] px-2.5 py-1 rounded-xl">
+                <span class="text-xs font-bold text-white bg-white/15 border border-white/20 px-3 py-1 rounded-xl backdrop-blur-sm">
                     {{ $disputes->count() }} Laporan
                 </span>
             </div>
@@ -216,7 +216,7 @@
                         ];
                     @endphp
 
-                    <div class="bg-white rounded-3xl border border-[#E5ECE7] p-5 sm:p-6 shadow-subtle space-y-4 hover:border-[#BFD4C7] transition-all">
+                    <div class="bg-white rounded-3xl border border-emerald-900/15 p-5 sm:p-6 shadow-xl space-y-4 text-[#1A241E]">
                         <!-- Card Top Bar: Ticket ID, Order Link & Status Badge -->
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 border-b border-[#E5ECE7]">
                             <div class="flex items-center gap-2 flex-wrap">
@@ -293,7 +293,7 @@
                     </div>
                 @empty
                     <!-- Empty State -->
-                    <div class="bg-white rounded-3xl border border-dashed border-[#C8D6CD] p-12 text-center shadow-subtle space-y-3">
+                    <div class="bg-white rounded-3xl border border-dashed border-[#C8D6CD] p-12 text-center shadow-xl space-y-3 text-[#1A241E]">
                         <div class="w-14 h-14 rounded-2xl bg-[#E3ECE6] text-[#1F3E2C] flex items-center justify-center mx-auto">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>

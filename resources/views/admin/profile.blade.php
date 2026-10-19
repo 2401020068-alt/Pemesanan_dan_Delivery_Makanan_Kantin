@@ -5,8 +5,8 @@
 @section('content')
 <div class="max-w-2xl mx-auto space-y-6">
     <div>
-        <h1 class="font-display text-2xl font-bold text-[#1A241E]">Profil Administrator</h1>
-        <p class="text-xs sm:text-sm text-[#76847B] mt-1">Kelola data profil akun pengelola sistem KantinKu.</p>
+        <h1 class="font-display text-2xl font-bold text-white">Profil Administrator</h1>
+        <p class="text-xs sm:text-sm text-emerald-200/90 mt-1 font-medium">Kelola data profil akun pengelola sistem KantinKu.</p>
     </div>
 
     <div class="bg-white rounded-3xl border border-[#E5ECE7] p-6 sm:p-8 shadow-subtle space-y-6 text-[#1A241E]">
