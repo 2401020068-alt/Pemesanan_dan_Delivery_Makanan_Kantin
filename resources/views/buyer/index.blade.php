@@ -64,12 +64,9 @@
             <div class="hidden lg:flex lg:col-span-5 xl:col-span-4 justify-end">
                 <div class="w-full max-w-xs bg-[#0A1D13] border border-emerald-500/30 rounded-2xl p-5 shadow-2xl relative">
                     <!-- Top Status Bar -->
-                    <div class="flex items-center justify-between pb-3.5 border-b border-emerald-900/60">
-                        <div class="flex items-center gap-2">
-                            <span class="flex h-2 w-2 rounded-full bg-emerald-400"></span>
-                            <span class="text-xs font-bold text-white tracking-wide">Layanan Kampus Aktif</span>
-                        </div>
-                        <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full border border-emerald-500/40">Siap Antar</span>
+                    <div class="flex items-center justify-between gap-2 pb-3.5 border-b border-emerald-900/60">
+                        <span class="text-xs font-bold text-white tracking-wide">Layanan Kampus Aktif</span>
+                        <span class="inline-flex items-center justify-center text-center whitespace-nowrap text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full border border-emerald-500/40 leading-none">Siap Antar</span>
                     </div>
 
                     <!-- Service Highlight Items -->
@@ -111,7 +108,9 @@
                     <!-- Bottom Coverage Info -->
                     <div class="mt-3.5 pt-3 border-t border-emerald-900/60 flex items-center justify-between text-[11px] text-emerald-300/80">
                         <span class="flex items-center gap-1.5 font-medium">
-                            <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                            <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
                             Tarif Flat Kampus
                         </span>
                         <span class="font-bold text-white bg-emerald-900/80 px-2 py-0.5 rounded-md border border-emerald-500/30">Rp 3.000</span>
