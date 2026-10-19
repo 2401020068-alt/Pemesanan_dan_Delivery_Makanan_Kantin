@@ -64,6 +64,57 @@ class KantinKuTest extends TestCase
         $this->get('/admin/profile')->assertStatus(200);
     }
 
+    public function test_admin_users_page_shows_navigation_and_add_admin_button()
+    {
+        $response = $this->get('/admin/users');
+        $response->assertStatus(200);
+        // Navigation links must be present
+        $response->assertSee('Persetujuan Penjual');
+        $response->assertSee('Persetujuan Warung');
+        $response->assertSee('Pengguna');
+        $response->assertSee('Laporan Digital');
+        $response->assertSee('Sengketa Transaksi');
+        // User management elements
+        $response->assertSee('Tambah Admin');
+    }
+
+    public function test_admin_can_create_new_admin()
+    {
+        $response = $this->post('/admin/users', [
+            'name' => 'Admin Baru',
+            'email' => 'admin.baru@kantinku.ac.id',
+            'phone' => '081299998888',
+            'role' => 'admin',
+            'password' => 'password123',
+            'status' => 'active',
+        ]);
+
+        $response->assertRedirect();
+        $this->assertDatabaseHas('users', [
+            'email' => 'admin.baru@kantinku.ac.id',
+            'role' => 'admin',
+            'status' => 'active',
+        ]);
+    }
+
+    public function test_admin_can_update_user()
+    {
+        $user = \App\Models\User::where('role', 'buyer')->first();
+        $response = $this->put('/admin/users/' . $user->id, [
+            'name' => 'Nama Baru Pembeli',
+            'email' => $user->email,
+            'phone' => '081122334455',
+            'role' => 'buyer',
+            'status' => 'active',
+        ]);
+
+        $response->assertRedirect();
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'name' => 'Nama Baru Pembeli',
+        ]);
+    }
+
     public function test_admin_can_export_csv()
     {
         $response = $this->get('/admin/reports/export');

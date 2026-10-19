@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Shop;
 use App\Models\Order;
@@ -112,11 +113,122 @@ class AdminController extends Controller
 
         $users = $query->paginate(15)->withQueryString();
 
-        return view('admin.users', compact('admin', 'users', 'role', 'search'));
+        $roleCounts = [
+            'all' => User::count(),
+            'admin' => User::where('role', 'admin')->count(),
+            'buyer' => User::where('role', 'buyer')->count(),
+            'seller' => User::where('role', 'seller')->count(),
+            'driver' => User::where('role', 'driver')->count(),
+        ];
+
+        return view('admin.users', compact('admin', 'users', 'role', 'search', 'roleCounts'));
+    }
+
+    public function storeUser(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'nullable|string|max:30',
+            'password' => 'required|string|min:6',
+            'status' => 'nullable|in:active,inactive',
+        ], [
+            'name.required' => 'Nama administrator wajib diisi.',
+            'email.required' => 'Alamat email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email ini sudah terdaftar di sistem.',
+            'password.required' => 'Kata sandi wajib diisi.',
+            'password.min' => 'Kata sandi minimal 6 karakter.',
+        ]);
+
+        $maxId = User::all()->map(function ($u) {
+            return (int) preg_replace('/\D/', '', $u->id);
+        })->max() ?? 0;
+        $newId = 'u' . ($maxId + 1);
+
+        $user = User::create([
+            'id' => $newId,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'role' => 'admin',
+            'status' => $request->status ?? 'active',
+            'approval' => null,
+            'avatar' => 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=70',
+            'password' => Hash::make($request->password),
+        ]);
+
+        $this->logAction('Menambah administrator baru', "{$user->name} ({$user->id})");
+
+        return back()->with('success', "Administrator {$user->name} berhasil ditambahkan!");
+    }
+
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:30',
+            'role' => 'required|in:admin,buyer,seller,driver',
+            'status' => 'required|in:active,inactive',
+            'password' => 'nullable|string|min:6',
+        ], [
+            'name.required' => 'Nama pengguna wajib diisi.',
+            'email.required' => 'Alamat email wajib diisi.',
+            'email.unique' => 'Email ini sudah digunakan oleh akun lain.',
+            'password.min' => 'Kata sandi baru minimal 6 karakter.',
+        ]);
+
+        $updateData = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'role' => $request->role,
+            'status' => $request->status,
+        ];
+
+        if ($request->filled('password')) {
+            $updateData['password'] = Hash::make($request->password);
+        }
+
+        $user->update($updateData);
+
+        $this->logAction('Memperbarui pengguna', "{$user->name} ({$user->id})");
+
+        return back()->with('success', "Data pengguna {$user->name} berhasil diperbarui.");
+    }
+
+    public function deleteUser($id)
+    {
+        $admin = $this->getAdmin();
+        if ($admin && $admin->id === $id) {
+            return back()->with('error', 'Anda tidak dapat menghapus akun admin yang sedang Anda gunakan.');
+        }
+
+        $user = User::findOrFail($id);
+        $name = $user->name;
+        $role = $user->role;
+
+        if ($user->role === 'seller' && $user->shop) {
+            $user->shop->delete();
+        }
+
+        $user->delete();
+
+        $this->logAction('Menghapus pengguna', "{$name} ({$id}) - Peran: {$role}");
+
+        return back()->with('success', "Pengguna {$name} berhasil dihapus dari sistem.");
     }
 
     public function toggleUserStatus($id)
     {
+        $admin = $this->getAdmin();
+        if ($admin && $admin->id === $id) {
+            return back()->with('error', 'Anda tidak dapat menonaktifkan akun admin Anda sendiri.');
+        }
+
         $user = User::findOrFail($id);
         $newStatus = $user->status === 'active' ? 'inactive' : 'active';
         $user->update(['status' => $newStatus]);

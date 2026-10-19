@@ -244,7 +244,7 @@
 </head>
 <body class="min-h-screen bg-[#FAFBF9] antialiased flex flex-col text-[#4A584F]">
     @php
-        $currentRole = $role ?? (request()->is('admin*') ? 'admin' : (request()->is('seller*') ? 'seller' : (request()->is('driver*') ? 'driver' : 'buyer')));
+        $currentRole = request()->is('admin*') ? 'admin' : (request()->is('seller*') ? 'seller' : (request()->is('driver*') ? 'driver' : 'buyer'));
         $cartSession = session('cart', []);
         $cartCount = 0;
         foreach ($cartSession as $c) {

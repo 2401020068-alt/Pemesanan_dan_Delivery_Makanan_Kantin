@@ -79,6 +79,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/shops', [AdminController::class, 'shops'])->name('shops');
     Route::post('/shops/{id}', [AdminController::class, 'approveShop'])->name('shops.approve');
     Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::post('/users', [AdminController::class, 'storeUser'])->name('users.store');
+    Route::put('/users/{id}', [AdminController::class, 'updateUser'])->name('users.update');
+    Route::delete('/users/{id}', [AdminController::class, 'deleteUser'])->name('users.delete');
     Route::post('/users/{id}/status', [AdminController::class, 'toggleUserStatus'])->name('users.status');
     Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
     Route::get('/reports/export', [AdminController::class, 'exportReportsCsv'])->name('reports.export');
