@@ -167,4 +167,48 @@ class KantinKuTest extends TestCase
         $disputes->assertStatus(200);
         $disputes->assertSee('pattern-emerald');
     }
+
+    public function test_api_canteens_returns_json()
+    {
+        $response = $this->getJson('/api/v1/canteens');
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'status',
+            'code',
+            'message',
+            'total',
+            'data',
+        ]);
+    }
+
+    public function test_api_menus_returns_json_with_filter()
+    {
+        $response = $this->getJson('/api/v1/menus?category=Makanan');
+        $response->assertStatus(200);
+        $response->assertJson([
+            'status' => 'success',
+            'code' => 200,
+        ]);
+    }
+
+    public function test_api_cart_add_and_get()
+    {
+        $addResponse = $this->postJson('/api/v1/cart/add', [
+            'menu_id' => 'm1',
+            'qty' => 2,
+        ]);
+        $addResponse->assertStatus(200);
+        $addResponse->assertJson([
+            'status' => 'success',
+            'cart_count' => 2,
+        ]);
+
+        $getResponse = $this->getJson('/api/v1/cart');
+        $getResponse->assertStatus(200);
+        $getResponse->assertJson([
+            'status' => 'success',
+            'cart_count' => 2,
+        ]);
+    }
 }
+

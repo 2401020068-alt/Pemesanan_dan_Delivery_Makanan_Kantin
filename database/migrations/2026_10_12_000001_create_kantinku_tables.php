@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('shops', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->string('owner_id');
-            $table->string('name');
+            $table->string('id', 50)->primary();
+            $table->string('owner_id', 50);
+            $table->string('name', 150);
             $table->text('description')->nullable();
             $table->text('image')->nullable();
-            $table->string('location')->nullable();
-            $table->string('hours')->nullable();
+            $table->string('location', 150)->nullable();
+            $table->string('hours', 100)->nullable();
             $table->boolean('open')->default(true);
-            $table->string('approval')->default('pending'); // pending, approved, rejected
+            $table->string('approval', 50)->default('pending'); // pending, approved, rejected
             $table->date('submitted')->nullable();
             $table->timestamps();
 
@@ -28,11 +28,11 @@ return new class extends Migration
         });
 
         Schema::create('menu_items', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->string('shop_id');
-            $table->string('name');
+            $table->string('id', 50)->primary();
+            $table->string('shop_id', 50);
+            $table->string('name', 150);
             $table->text('description')->nullable();
-            $table->string('category')->default('Makanan');
+            $table->string('category', 50)->default('Makanan');
             $table->integer('price')->default(0);
             $table->text('image')->nullable();
             $table->boolean('available')->default(true);
@@ -42,21 +42,21 @@ return new class extends Migration
         });
 
         Schema::create('orders', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->string('trx_id');
-            $table->string('buyer_id');
-            $table->string('shop_id');
-            $table->string('driver_id')->nullable();
+            $table->string('id', 50)->primary();
+            $table->string('trx_id', 50);
+            $table->string('buyer_id', 50);
+            $table->string('shop_id', 50);
+            $table->string('driver_id', 50)->nullable();
             $table->integer('subtotal')->default(0);
             $table->integer('delivery_fee')->default(3000);
             $table->integer('total')->default(0);
             $table->text('address');
             $table->text('note')->nullable();
-            $table->string('payment_method')->default('QRIS');
-            $table->string('payment_status')->default('unpaid'); // unpaid, pending, verified, rejected
+            $table->string('payment_method', 50)->default('QRIS');
+            $table->string('payment_status', 50)->default('unpaid'); // unpaid, pending, verified, rejected
             $table->text('proof')->nullable();
-            $table->string('status')->default('created'); // created, paid, processing, ready, delivering, done, cancelled
-            $table->string('delivery_status')->default('waiting'); // waiting, picked, onway, done
+            $table->string('status', 50)->default('created'); // created, paid, processing, ready, delivering, done, cancelled
+            $table->string('delivery_status', 50)->default('waiting'); // waiting, picked, onway, done
             $table->timestamps();
 
             $table->foreign('buyer_id')->references('id')->on('users')->onDelete('cascade');
@@ -66,9 +66,9 @@ return new class extends Migration
 
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->string('order_id');
-            $table->string('menu_id');
-            $table->string('name');
+            $table->string('order_id', 50);
+            $table->string('menu_id', 50);
+            $table->string('name', 150);
             $table->text('image')->nullable();
             $table->integer('price')->default(0);
             $table->integer('qty')->default(1);
@@ -78,13 +78,13 @@ return new class extends Migration
         });
 
         Schema::create('disputes', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->string('order_id');
-            $table->string('buyer_id');
-            $table->string('issue');
+            $table->string('id', 50)->primary();
+            $table->string('order_id', 50);
+            $table->string('buyer_id', 50);
+            $table->string('issue', 150);
             $table->text('description');
             $table->text('proof')->nullable();
-            $table->string('status')->default('open'); // open, review, resolved, rejected
+            $table->string('status', 50)->default('open'); // open, review, resolved, rejected
             $table->text('resolution')->nullable();
             $table->timestamps();
 
@@ -93,12 +93,12 @@ return new class extends Migration
         });
 
         Schema::create('activity_logs', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->string('id', 50)->primary();
             $table->dateTime('time');
-            $table->string('admin');
-            $table->string('action');
-            $table->string('target');
-            $table->string('status')->default('success'); // success, failed
+            $table->string('admin', 100);
+            $table->string('action', 150);
+            $table->string('target', 150);
+            $table->string('status', 50)->default('success'); // success, failed
             $table->timestamps();
         });
     }

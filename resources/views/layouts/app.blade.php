@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'KantinKu') - Kantin Kampus Digital</title>
     <meta name="description" content="Pesan makanan dari kantin kampus secara online, bayar mudah, dan diantar langsung ke kelasmu.">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}?v=4">
@@ -286,9 +287,7 @@
                             <svg class="w-4 h-4 {{ request()->routeIs('buyer.cart') ? 'text-[#1F3E2C]' : 'text-[#76847B]' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                             <span>Keranjang</span>
                         </div>
-                        @if($cartCount > 0)
-                            <span class="px-2 py-0.5 rounded-full text-xs font-bold bg-[#1F3E2C] text-white">{{ $cartCount }}</span>
-                        @endif
+                        <span class="cart-badge-count px-2 py-0.5 rounded-full text-xs font-bold bg-[#1F3E2C] text-white {{ $cartCount > 0 ? '' : 'hidden' }}">{{ $cartCount }}</span>
                     </a>
                     <a href="{{ route('buyer.orders') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('buyer.orders*') ? 'bg-[#E3ECE6] text-[#1F3E2C] font-semibold' : 'text-[#4A584F] hover:bg-[#F1F5F2] hover:text-[#1A241E]' }}">
                         <svg class="w-4 h-4 {{ request()->routeIs('buyer.orders*') ? 'text-[#1F3E2C]' : 'text-[#76847B]' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
@@ -402,9 +401,7 @@
                     @if($currentRole === 'buyer')
                         <a href="{{ route('buyer.cart') }}" class="relative p-2 rounded-xl border transition {{ $isEmeraldPage ? 'text-emerald-200 hover:text-white hover:bg-emerald-900/60 border-emerald-500/20' : 'text-[#4A584F] hover:text-[#1F3E2C] hover:bg-[#E3ECE6] border-transparent hover:border-[#BFD4C7]' }}" title="Keranjang Belanja">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                            @if($cartCount > 0)
-                                <span class="absolute top-1 right-1 flex h-4 min-w-[1rem] px-1 items-center justify-center rounded-full bg-emerald-600 text-[10px] font-bold text-white shadow-xs">{{ $cartCount }}</span>
-                            @endif
+                            <span class="cart-badge-count absolute top-1 right-1 flex h-4 min-w-[1rem] px-1 items-center justify-center rounded-full bg-emerald-600 text-[10px] font-bold text-white shadow-xs {{ $cartCount > 0 ? '' : 'hidden' }}">{{ $cartCount }}</span>
                         </a>
                     @endif
 
@@ -462,9 +459,7 @@
                     </a>
                     <a href="{{ route('buyer.cart') }}" class="flex flex-col items-center gap-1 text-[10px] font-semibold relative {{ request()->routeIs('buyer.cart') ? 'text-[#1F3E2C]' : 'text-[#76847B]' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                        @if($cartCount > 0)
-                            <span class="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[#1F3E2C] text-[8px] font-bold text-white">{{ $cartCount }}</span>
-                        @endif
+                        <span class="cart-badge-count absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[#1F3E2C] text-[8px] font-bold text-white {{ $cartCount > 0 ? '' : 'hidden' }}">{{ $cartCount }}</span>
                         <span>Keranjang</span>
                     </a>
                     <a href="{{ route('buyer.orders') }}" class="flex flex-col items-center gap-1 text-[10px] font-semibold {{ request()->routeIs('buyer.orders*') ? 'text-[#1F3E2C]' : 'text-[#76847B]' }}">
@@ -528,5 +523,7 @@
     </div>
 
     @stack('scripts')
+    <!-- KantinKu Vanilla JavaScript (Fetch API & DOM) -->
+    <script src="{{ asset('js/kantinku.js') }}"></script>
 </body>
 </html>

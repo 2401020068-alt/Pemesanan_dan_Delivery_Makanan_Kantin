@@ -9,8 +9,8 @@
 - **Nama Aplikasi:** KantinKu (Kantin Kampus Digital)
 - **Framework Utama:** Laravel Framework (PHP 8.2+)
 - **Arsitektur:** Model-View-Controller (MVC)
-- **Basis Data:** Relational Database (SQLite / MySQL)
-- **Frontend & Styling:** Blade Templating Engine & Tailwind CSS
+- **Basis Data:** Relational Database (WAMP MySQL / SQLite)
+- **Frontend & Styling:** Blade Templating Engine, Tailwind CSS, & Vanilla JS (Fetch API)
 
 ---
 
@@ -130,6 +130,7 @@ kantinku/
 │   │       ├── SellerController.php    # Manajemen warung, menu & pesanan
 │   │       ├── DriverController.php    # Pengantaran & update progres kurir
 │   │       ├── AdminController.php     # Approval, user, dispute & laporan
+│   │       ├── ApiController.php       # REST API endpoints (JSON response)
 │   │       └── DemoController.php      # Reset basis data demo 1-klik
 │   └── Models/
 │       ├── User.php
@@ -145,6 +146,8 @@ kantinku/
 │       └── DatabaseSeeder.php          # Data awal siap saji (11 user, 6 warung, 14 menu, dll)
 ├── public/
 │   ├── index.php                       # Titik masuk utama aplikasi Laravel
+│   ├── js/
+│   │   └── kantinku.js                 # Vanilla JS (DOM Manipulation & Fetch API)
 │   └── .htaccess                       # URL rewriting Apache
 ├── resources/
 │   └── views/
@@ -189,6 +192,13 @@ kantinku/
   - `GET /admin/reports` & `GET /admin/reports/export` - Laporan & Ekspor CSV
   - `GET /admin/disputes` - Mediasi sengketa
   - `GET /admin/logs` - Log audit
+- **REST API v1 (JSON Responses - Silabus RPS Minggu 6 & 12):**
+  - `GET /api/v1/canteens` - Daftar seluruh warung kantin aktif (JSON)
+  - `GET /api/v1/canteens/{id}` - Detail warung kantin dan daftar menu (JSON)
+  - `GET /api/v1/menus` - Katalog menu makanan/minuman dengan filter (JSON)
+  - `GET /api/v1/orders/{id}` - Pelacakan detail transaksi pesanan (JSON)
+  - `POST /api/v1/cart/add` - Tambah menu ke keranjang via Fetch API (JSON)
+  - `GET /api/v1/cart` - Ringkasan isi dan kalkulasi subtotal keranjang (JSON)
 
 ---
 
@@ -229,22 +239,49 @@ Proyek pengembangan aplikasi **KantinKu** telah berhasil dikonversi dan diimplem
 
 ### Prasyarat
 - PHP versi 8.2 atau lebih baru
-- Ekstensi PHP: `pdo_sqlite` (atau `pdo_mysql`), `mbstring`, `openssl`, `curl`
+- Ekstensi PHP: `pdo_sqlite` (atau `pdo_mysql` jika menggunakan WAMP/XAMPP), `mbstring`, `openssl`, `curl`
 - Web Browser modern (Chrome, Edge, Firefox)
+- WAMP Server / XAMPP (Opsional jika ingin menggunakan database MySQL di phpMyAdmin)
 
-### Langkah-langkah
+### Opsi 1: Menjalankan dengan Database SQLite (Bawaan / Portabel)
 1. **Buka Terminal / PowerShell di direktori proyek:**
    ```bash
-   cd "D:\SEMESTER 5\PEMROGRAMAN WEB\kantinku"
+   cd "D:\TUGAS\SMT 5\PW radzi\Web Kantinku\Pemesanan_dan_Delivery_Makanan_Kantin"
    ```
 2. **Jalankan server lokal Laravel:**
    ```bash
    php artisan serve
    ```
-3. **Buka di browser:**
-   Akses alamat: `http://127.0.0.1:8000`
-4. **Akun Uji Demo:**
-   - **Admin:** `admin@kantinku.ac.id` (Password: `password123`) atau via role switcher
-   - **Pembeli:** `andi@student.ac.id` (Password: `password123`) atau via role switcher
-   - **Penjual:** `siti@warung.id` (Password: `password123`) atau via role switcher
-   - **Driver:** `budi.driver@kantinku.ac.id` (Password: `password123`) atau via role switcher
+3. **Buka di browser:** `http://127.0.0.1:8000`
+
+### Opsi 2: Menjalankan dengan Database WAMP MySQL (phpMyAdmin)
+1. **Nyalakan WAMP Server** (pastikan ikon WAMP berwarna hijau di system tray).
+2. **Buka phpMyAdmin** di browser: `http://localhost/phpmyadmin`
+3. **Buat database baru** dengan nama: `kantinku`
+4. **Buka file `.env`** dan sesuaikan konfigurasi database:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=kantinku
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+5. **Jalankan migrasi skema dan seeder data:**
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
+6. Seluruh tabel (`users`, `shops`, `menu_items`, `orders`, `order_items`, `disputes`, `activity_logs`) akan langsung tersimpan di MySQL WAMP Anda!
+
+### Pengujian REST API (JSON Endpoints)
+Dosen dapat menguji respons data JSON melalui browser atau aplikasi Postman pada URL:
+- `http://127.0.0.1:8000/api/v1/canteens`
+- `http://127.0.0.1:8000/api/v1/menus?category=Makanan`
+- `http://127.0.0.1:8000/api/v1/cart`
+
+### Akun Uji Demo:
+- **Admin:** `admin@kantinku.ac.id` (Password: `password123`) atau via role switcher
+- **Pembeli:** `andi@student.ac.id` (Password: `password123`) atau via role switcher
+- **Penjual:** `siti@warung.id` (Password: `password123`) atau via role switcher
+- **Driver:** `budi.driver@kantinku.ac.id` (Password: `password123`) atau via role switcher
+

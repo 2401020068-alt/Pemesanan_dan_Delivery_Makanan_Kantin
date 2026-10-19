@@ -8,6 +8,7 @@ use App\Http\Controllers\SellerController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DemoController;
+use App\Http\Controllers\ApiController;
 
 // Public & Landing
 Route::get('/', [LandingController::class, 'index'])->name('landing');
@@ -91,3 +92,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
     Route::post('/profile', [AdminController::class, 'updateProfile'])->name('profile.update');
 });
+
+// REST API v1 Routes (JSON Responses) - Sesuai Silabus RPS Pertemuan 6 & 12
+Route::prefix('api/v1')->name('api.v1.')->group(function () {
+    Route::get('/canteens', [ApiController::class, 'getCanteens'])->name('canteens');
+    Route::get('/canteens/{id}', [ApiController::class, 'getCanteenDetail'])->name('canteens.detail');
+    Route::get('/menus', [ApiController::class, 'getMenus'])->name('menus');
+    Route::get('/orders/{id}', [ApiController::class, 'getOrderDetail'])->name('orders.detail');
+    Route::post('/cart/add', [ApiController::class, 'addToCart'])->name('cart.add');
+    Route::get('/cart', [ApiController::class, 'getCart'])->name('cart.index');
+});
+
