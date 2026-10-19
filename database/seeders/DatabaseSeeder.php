@@ -195,7 +195,7 @@ class DatabaseSeeder extends Seeder
         $disputes = [
             ['id' => 'DSP-501', 'order_id' => 'ORD-1008', 'buyer_id' => 'u2', 'issue' => 'Pesanan tidak sesuai', 'description' => 'Bakso yang diterima hanya 3 butir, seharusnya 5 butir.', 'proof' => null, 'status' => 'review', 'resolution' => null, 'created_at' => '2026-09-25 14:00:00'],
             ['id' => 'DSP-502', 'order_id' => 'ORD-1007', 'buyer_id' => 'u9', 'issue' => 'Pembayaran ditolak padahal sudah transfer', 'description' => 'Saya sudah transfer via e-wallet namun pembayaran ditolak penjual.', 'proof' => $u('1555396273-367ea4eb4db5', 400), 'status' => 'open', 'resolution' => null, 'created_at' => '2026-09-24 15:10:00'],
-            ['id' => 'DSP-503', 'order_id' => 'ORD-1001', 'buyer_id' => 'u2', 'issue' => 'Pengantaran terlambat', 'description' => 'Pesanan datang 40 menit setelah status siap diantar.', 'proof' => null, 'status' => 'resolved', 'resolution' => 'Driver telah diberi teguran edukasi sistem.', 'created_at' => '2026-09-22 13:00:00'],
+            ['id' => 'DSP-503', 'order_id' => 'ORD-1001', 'buyer_id' => 'u2', 'issue' => 'Pengantaran terlambat', 'description' => 'Pesanan datang 40 menit setelah status siap diantar.', 'proof' => null, 'status' => 'resolved', 'resolution' => 'Kurir telah diberi teguran edukasi sistem dan kompensasi ongkir disetujui.', 'created_at' => '2026-09-22 13:00:00'],
         ];
 
         foreach ($disputes as $disputeData) {

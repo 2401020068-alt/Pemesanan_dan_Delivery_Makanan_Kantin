@@ -229,16 +229,14 @@
             outline: none !important;
         }
 
-        /* Emerald pattern for profile & disputes */
+        /* Refined Emerald tone for profile & disputes (coherent with KantinKu design system) */
         .pattern-emerald {
-            background-color: #031c12 !important;
+            background-color: #FAFBF9;
             background-image: 
-                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.18) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(245, 158, 11, 0.12) 0px, transparent 50%),
-                radial-gradient(at 50% 50%, rgba(5, 150, 105, 0.15) 0px, transparent 60%),
-                radial-gradient(rgba(16, 185, 129, 0.12) 1px, transparent 1px) !important;
-            background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px !important;
-            background-attachment: fixed !important;
+                radial-gradient(at 0% 0%, rgba(31, 62, 44, 0.04) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(166, 138, 104, 0.05) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(45, 85, 61, 0.03) 0px, transparent 60%);
+            background-attachment: fixed;
         }
     </style>
     @stack('styles')
@@ -385,32 +383,32 @@
         </aside>
 
         <!-- Main Wrapper -->
-        <div class="flex-1 lg:pl-64 flex flex-col min-h-screen {{ $isEmeraldPage ? 'pattern-emerald text-slate-100' : 'bg-[#FAFBF9]' }}">
+        <div class="flex-1 lg:pl-64 flex flex-col min-h-screen {{ $isEmeraldPage ? 'pattern-emerald' : 'bg-[#FAFBF9]' }}">
             <!-- Top Sticky Header -->
-            <header class="sticky top-0 z-20 h-16 border-b px-4 sm:px-6 flex items-center justify-between transition-colors {{ $isEmeraldPage ? 'bg-[#031c12]/90 border-emerald-900/50 backdrop-blur-md text-white' : 'border-[#E5ECE7] glass-header' }}">
+            <header class="sticky top-0 z-20 h-16 border-b px-4 sm:px-6 flex items-center justify-between border-[#E5ECE7] glass-header transition-colors">
                 <!-- Mobile Logo / Toggle -->
                 <div class="flex items-center gap-3 lg:hidden">
                     <a href="/" class="flex items-center gap-1.5">
-                        <img src="{{ asset($isEmeraldPage ? 'images/logo_white.svg' : 'images/logo.svg') }}" alt="Logo KantinKu" class="h-8 w-auto object-contain">
-                        <span class="font-display font-bold {{ $isEmeraldPage ? 'text-white' : 'text-[#1A241E]' }} text-lg">antin<span class="{{ $isEmeraldPage ? 'text-amber-400' : 'text-[#2D553D]' }}">Ku</span></span>
+                        <img src="{{ asset('images/logo.svg') }}" alt="Logo KantinKu" class="h-8 w-auto object-contain">
+                        <span class="font-display font-bold text-[#1A241E] text-lg">antin<span class="text-[#2D553D]">Ku</span></span>
                     </a>
                 </div>
 
                 <!-- Top Right Controls -->
                 <div class="flex items-center gap-3 ml-auto">
                     @if($currentRole === 'buyer')
-                        <a href="{{ route('buyer.cart') }}" class="relative p-2 rounded-xl border transition {{ $isEmeraldPage ? 'text-emerald-200 hover:text-white hover:bg-emerald-900/60 border-emerald-500/20' : 'text-[#4A584F] hover:text-[#1F3E2C] hover:bg-[#E3ECE6] border-transparent hover:border-[#BFD4C7]' }}" title="Keranjang Belanja">
+                        <a href="{{ route('buyer.cart') }}" class="relative p-2 rounded-xl border border-transparent hover:border-[#BFD4C7] text-[#4A584F] hover:text-[#1F3E2C] hover:bg-[#E3ECE6] transition" title="Keranjang Belanja">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                            <span class="cart-badge-count absolute top-1 right-1 flex h-4 min-w-[1rem] px-1 items-center justify-center rounded-full bg-emerald-600 text-[10px] font-bold text-white shadow-xs {{ $cartCount > 0 ? '' : 'hidden' }}">{{ $cartCount }}</span>
+                            <span class="cart-badge-count absolute top-1 right-1 flex h-4 min-w-[1rem] px-1 items-center justify-center rounded-full bg-[#1F3E2C] text-[10px] font-bold text-white shadow-xs {{ $cartCount > 0 ? '' : 'hidden' }}">{{ $cartCount }}</span>
                         </a>
                     @endif
 
                     <!-- User Pill Profile -->
                     <div class="flex items-center gap-2.5">
-                        <img src="{{ $authUser->avatar ?? 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=70' }}" alt="{{ $authUser->name }}" class="w-8 h-8 rounded-full object-cover ring-2 {{ $isEmeraldPage ? 'ring-emerald-400/40' : 'ring-[#BFD4C7]' }} shadow-xs">
+                        <img src="{{ $authUser->avatar ?? 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=70' }}" alt="{{ $authUser->name }}" class="w-8 h-8 rounded-full object-cover ring-2 ring-[#BFD4C7] shadow-xs">
                         <div class="hidden sm:block text-left leading-none">
-                            <div class="text-xs font-bold {{ $isEmeraldPage ? 'text-white' : 'text-[#1A241E]' }} truncate max-w-[120px]">{{ $authUser->name }}</div>
-                            <span class="text-[10px] {{ $isEmeraldPage ? 'text-emerald-300' : 'text-[#76847B]' }} font-medium">{{ ['buyer' => 'Pembeli', 'seller' => 'Penjual', 'driver' => 'Kurir', 'admin' => 'Admin'][$authUser->role] ?? ucfirst($authUser->role) }}</span>
+                            <div class="text-xs font-bold text-[#1A241E] truncate max-w-[120px]">{{ $authUser->name }}</div>
+                            <span class="text-[10px] text-[#76847B] font-medium">{{ ['buyer' => 'Pembeli', 'seller' => 'Penjual', 'driver' => 'Kurir', 'admin' => 'Admin'][$authUser->role] ?? ucfirst($authUser->role) }}</span>
                         </div>
                     </div>
                 </div>
