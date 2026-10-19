@@ -11,111 +11,50 @@
         <div class="pointer-events-none absolute -bottom-16 -left-16 h-72 w-72 rounded-full bg-gradient-to-tr from-[#A68A68]/15 via-[#3F6E52]/20 to-transparent blur-2xl"></div>
         <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent"></div>
 
-        <div class="relative z-10 grid gap-6 lg:grid-cols-12 lg:items-center">
-            <!-- Left Info & Search -->
-            <div class="lg:col-span-7 xl:col-span-8 max-w-2xl">
-                <!-- Pill Badge with White Logo -->
-                <div class="inline-flex items-center gap-2 rounded-full bg-white/12 px-3.5 py-1.5 text-xs font-semibold backdrop-blur-md border border-white/20 text-[#E8F3ED] shadow-xs transition-colors hover:bg-white/15">
-                    <img src="{{ asset('images/logo_white.svg') }}" alt="KantinKu Logo" class="h-4 w-auto object-contain shrink-0 filter drop-shadow-xs">
-                    <span class="tracking-wide">Kantin Kampus Online Terpadu</span>
-                </div>
-
-                <h1 class="mt-3.5 font-display text-2xl sm:text-3xl lg:text-[2.5rem] font-extrabold leading-tight tracking-tight text-white">
-                    Mau makan apa hari ini, <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#E8F3ED] to-[#BFD4C7]">{{ $buyer->name }}</span>?
-                </h1>
-
-                <p class="mt-2.5 text-sm sm:text-base text-[#D0E2D6] leading-relaxed max-w-xl font-normal">
-                    Pesan makanan hangat dari warung kantin favorit di kampus, bayar praktis via QRIS, dan nikmati hidangan lezat langsung di kelas atau ruanganmu.
-                </p>
-
-                <!-- Search Input Form with elevated floating container -->
-                <form action="{{ route('buyer.index') }}" method="GET" class="mt-6 max-w-xl">
-                    <div class="relative flex items-center bg-white rounded-2xl p-1.5 shadow-lg shadow-black/15 border border-white/40 transition-all focus-within:ring-2 focus-within:ring-[#BFD4C7] focus-within:shadow-xl">
-                        <div class="flex items-center pl-3.5 pr-2 pointer-events-none text-[#76847B]">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
-                        </div>
-                        <input type="text" name="q" value="{{ $search }}" placeholder="Cari nasi goreng, mie ayam, kopi, jus..." class="w-full bg-transparent text-[#1A241E] placeholder-[#76847B] text-sm py-2 px-1 focus:outline-none font-medium">
-                        @if($search)
-                            <a href="{{ route('buyer.index') }}" class="p-1.5 mr-1 text-[#76847B] hover:text-[#1A241E] rounded-lg transition" title="Reset">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                            </a>
-                        @endif
-                        <button type="submit" class="shrink-0 rounded-xl bg-gradient-to-r from-[#A68A68] to-[#8E7252] hover:from-[#B89A74] hover:to-[#9E805E] px-5 py-2.5 text-sm font-bold text-white shadow-xs transition-all active:scale-95 flex items-center gap-1.5">
-                            <span>Cari</span>
-                        </button>
-                    </div>
-
-                    <!-- Quick Search Suggestion Chips -->
-                    <div class="mt-3.5 flex flex-wrap items-center gap-2 text-xs">
-                        <span class="text-[11px] font-medium text-[#BFD4C7]/80">Coba cari:</span>
-                        @foreach(['Nasi Goreng', 'Mie Ayam', 'Kopi Susu', 'Ayam Geprek'] as $chip)
-                            <a href="{{ route('buyer.index', ['q' => $chip]) }}" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 text-[#E8F3ED] text-[11px] font-medium backdrop-blur-sm border border-white/15 transition-all hover:scale-105 active:scale-95">
-                                {{ $chip }}
-                            </a>
-                        @endforeach
-                    </div>
-                </form>
+        <div class="relative z-10 max-w-2xl">
+            <!-- Pill Badge with White Logo -->
+            <div class="inline-flex items-center gap-2 rounded-full bg-white/12 px-3.5 py-1.5 text-xs font-semibold backdrop-blur-md border border-white/20 text-[#E8F3ED] shadow-xs transition-colors hover:bg-white/15">
+                <img src="{{ asset('images/logo_white.svg') }}" alt="KantinKu Logo" class="h-4 w-auto object-contain shrink-0 filter drop-shadow-xs">
+                <span class="tracking-wide">Kantin Kampus Online Terpadu</span>
             </div>
 
-            <!-- Right Showcase Card (Clean, Sharp, Human-Crafted) -->
-            <div class="hidden lg:flex lg:col-span-5 xl:col-span-4 justify-end">
-                <div class="w-full max-w-xs bg-[#0A1D13] border border-emerald-500/30 rounded-2xl p-5 shadow-2xl relative">
-                    <!-- Top Status Bar -->
-                    <div class="flex items-center justify-between gap-2 pb-3.5 border-b border-emerald-900/60">
-                        <span class="text-xs font-bold text-white tracking-wide">Layanan Kampus Aktif</span>
-                        <span class="inline-flex items-center justify-center text-center whitespace-nowrap text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full border border-emerald-500/40 leading-none">Siap Antar</span>
+            <h1 class="mt-3.5 font-display text-2xl sm:text-3xl lg:text-[2.5rem] font-extrabold leading-tight tracking-tight text-white">
+                Mau makan apa hari ini, <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#E8F3ED] to-[#BFD4C7]">{{ $buyer->name }}</span>?
+            </h1>
+
+            <p class="mt-2.5 text-sm sm:text-base text-[#D0E2D6] leading-relaxed max-w-xl font-normal">
+                Pesan makanan hangat dari warung kantin favorit di kampus, bayar praktis via QRIS, dan nikmati hidangan lezat langsung di kelas atau ruanganmu.
+            </p>
+
+            <!-- Search Input Form with elevated floating container -->
+            <form action="{{ route('buyer.index') }}" method="GET" class="mt-6 max-w-xl">
+                <div class="relative flex items-center bg-white rounded-2xl p-1.5 shadow-lg shadow-black/15 border border-white/40 transition-all focus-within:ring-2 focus-within:ring-[#BFD4C7] focus-within:shadow-xl">
+                    <div class="flex items-center pl-3.5 pr-2 pointer-events-none text-[#76847B]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
                     </div>
-
-                    <!-- Service Highlight Items -->
-                    <div class="mt-3.5 space-y-2.5">
-                        <!-- Item 1: Antar Cepat -->
-                        <div class="flex items-center gap-3 bg-[#11281B] hover:bg-[#163323] transition-colors duration-150 rounded-xl p-3 border border-emerald-900/50">
-                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                                <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
-                            </div>
-                            <div class="min-w-0">
-                                <div class="font-bold text-white text-xs leading-snug">Antar Cepat ke Kelas</div>
-                                <div class="text-[11px] text-emerald-200/75 leading-tight mt-0.5">Estimasi 10–20 Menit</div>
-                            </div>
-                        </div>
-
-                        <!-- Item 2: QRIS & Transfer -->
-                        <div class="flex items-center gap-3 bg-[#11281B] hover:bg-[#163323] transition-colors duration-150 rounded-xl p-3 border border-emerald-900/50">
-                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/30">
-                                <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
-                            </div>
-                            <div class="min-w-0">
-                                <div class="font-bold text-white text-xs leading-snug">QRIS & Transfer Instan</div>
-                                <div class="text-[11px] text-emerald-200/75 leading-tight mt-0.5">Tanpa repot uang kembalian</div>
-                            </div>
-                        </div>
-
-                        <!-- Item 3: Warung Terverifikasi -->
-                        <div class="flex items-center gap-3 bg-[#11281B] hover:bg-[#163323] transition-colors duration-150 rounded-xl p-3 border border-emerald-900/50">
-                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-500/20 text-teal-400 border border-teal-500/30">
-                                <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                            </div>
-                            <div class="min-w-0">
-                                <div class="font-bold text-white text-xs leading-snug">Warung Terverifikasi</div>
-                                <div class="text-[11px] text-emerald-200/75 leading-tight mt-0.5">Menu higienis harga mahasiswa</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bottom Coverage Info -->
-                    <div class="mt-3.5 pt-3 border-t border-emerald-900/60 flex items-center justify-between text-[11px] text-emerald-300/80">
-                        <span class="flex items-center gap-1.5 font-medium">
-                            <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-                            Tarif Flat Kampus
-                        </span>
-                        <span class="font-bold text-white bg-emerald-900/80 px-2 py-0.5 rounded-md border border-emerald-500/30">Rp 3.000</span>
-                    </div>
+                    <input type="text" name="q" value="{{ $search }}" placeholder="Cari nasi goreng, mie ayam, kopi, jus..." class="w-full bg-transparent text-[#1A241E] placeholder-[#76847B] text-sm py-2 px-1 focus:outline-none font-medium">
+                    @if($search)
+                        <a href="{{ route('buyer.index') }}" class="p-1.5 mr-1 text-[#76847B] hover:text-[#1A241E] rounded-lg transition" title="Reset">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </a>
+                    @endif
+                    <button type="submit" class="shrink-0 rounded-xl bg-gradient-to-r from-[#A68A68] to-[#8E7252] hover:from-[#B89A74] hover:to-[#9E805E] px-5 py-2.5 text-sm font-bold text-white shadow-xs transition-all active:scale-95 flex items-center gap-1.5">
+                        <span>Cari</span>
+                    </button>
                 </div>
-            </div>
+
+                <!-- Quick Search Suggestion Chips -->
+                <div class="mt-3.5 flex flex-wrap items-center gap-2 text-xs">
+                    <span class="text-[11px] font-medium text-[#BFD4C7]/80">Coba cari:</span>
+                    @foreach(['Nasi Goreng', 'Mie Ayam', 'Kopi Susu', 'Ayam Geprek'] as $chip)
+                        <a href="{{ route('buyer.index', ['q' => $chip]) }}" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 text-[#E8F3ED] text-[11px] font-medium backdrop-blur-sm border border-white/15 transition-all hover:scale-105 active:scale-95">
+                            {{ $chip }}
+                        </a>
+                    @endforeach
+                </div>
+            </form>
         </div>
     </div>
 
