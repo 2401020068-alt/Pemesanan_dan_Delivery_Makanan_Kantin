@@ -121,27 +121,53 @@
             </a>
         </div>
 
-        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             @foreach($shops->take(3) as $shop)
-                <a href="{{ route('buyer.canteens.show', $shop->id) }}" class="group bg-white rounded-2xl border border-[#E5ECE7] overflow-hidden shadow-subtle hover:border-[#1F3E2C] transition-all">
-                    <div class="relative h-40 w-full overflow-hidden bg-[#F4F6F4]">
-                        <img src="{{ $shop->image ?? 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=70' }}" alt="{{ $shop->name }}" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                        <div class="absolute top-3 right-3">
-                            <span class="inline-flex items-center justify-center px-2.5 py-1 rounded-full text-[11px] font-bold {{ $shop->open ? 'bg-[#1F3E2C]/90 text-white' : 'bg-[#1A241E]/80 text-[#BFD4C7]' }} backdrop-blur-md">
-                                {{ $shop->open ? 'Buka' : 'Tutup' }}
-                            </span>
+                <a href="{{ route('buyer.canteens.show', $shop->id) }}" class="group bg-white rounded-3xl border border-[#E5ECE7] overflow-hidden shadow-subtle hover:shadow-lg hover:border-[#1F3E2C]/40 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 w-full overflow-hidden bg-[#F4F6F4]">
+                            <img src="{{ $shop->image ?? 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=70' }}" alt="{{ $shop->name }}" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                            <div class="absolute top-3.5 right-3.5">
+                                <span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] font-bold {{ $shop->open ? 'bg-[#1F3E2C]/95 text-white shadow-xs' : 'bg-[#1A241E]/80 text-[#BFD4C7]' }} backdrop-blur-md">
+                                    {{ $shop->open ? 'Buka' : 'Tutup' }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-5 sm:p-6">
+                            <div class="flex items-center justify-between gap-2">
+                                <h3 class="font-display font-bold text-[#1A241E] group-hover:text-[#1F3E2C] transition-colors text-base sm:text-lg">
+                                    {{ $shop->name }}
+                                </h3>
+                                <span class="text-[11px] font-semibold text-[#1F3E2C] bg-[#E3ECE6] px-2.5 py-0.5 rounded-lg shrink-0">
+                                    {{ $shop->menuItems->count() }} Menu
+                                </span>
+                            </div>
+
+                            <p class="mt-2 text-xs text-[#526357] line-clamp-2 leading-relaxed min-h-[2.5rem]">
+                                {{ $shop->description }}
+                            </p>
                         </div>
                     </div>
-                    <div class="p-4.5">
-                        <h3 class="font-display font-bold text-[#1A241E] group-hover:text-[#1F3E2C] transition text-base">{{ $shop->name }}</h3>
-                        <p class="mt-1 text-xs text-[#76847B] line-clamp-1 leading-relaxed">{{ $shop->description }}</p>
-                        <div class="mt-3.5 flex items-center justify-between text-[11px] text-[#76847B] border-t border-[#E5ECE7] pt-3">
-                            <span class="flex items-center gap-1 text-[#4A584F] font-medium">
-                                <svg class="w-3.5 h-3.5 text-[#3F6E52]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
-                                {{ $shop->location }}
-                            </span>
-                            <span class="text-[#76847B]">{{ $shop->hours }}</span>
+
+                    <div class="px-5 pb-5 sm:px-6 sm:pb-6 pt-0">
+                        <div class="pt-3.5 flex items-center justify-between gap-2 text-xs border-t border-[#E5ECE7]">
+                            <div class="flex items-center gap-1.5 min-w-0 text-[#4A584F]" title="{{ $shop->location }}">
+                                <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-[#EAF2ED] text-[#1F3E2C]">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                    </svg>
+                                </span>
+                                <span class="truncate font-medium text-[11px] text-[#334237]">{{ $shop->location }}</span>
+                            </div>
+
+                            <div class="flex items-center gap-1.5 shrink-0 bg-[#F6F4F0] text-[#7A6248] px-2.5 py-1 rounded-lg border border-[#EBE6DD]">
+                                <svg class="w-3.5 h-3.5 text-[#9E805E] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span class="font-semibold text-[11px]">{{ $shop->hours }}</span>
+                            </div>
                         </div>
                     </div>
                 </a>
