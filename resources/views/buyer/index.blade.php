@@ -60,53 +60,61 @@
                 </form>
             </div>
 
-            <!-- Right Showcase Card -->
+            <!-- Right Showcase Card (Clean, Sharp, Human-Crafted) -->
             <div class="hidden lg:flex lg:col-span-5 xl:col-span-4 justify-end">
-                <div class="w-full max-w-xs bg-white/10 backdrop-blur-2xl border border-white/20 rounded-2xl p-5 shadow-2xl relative overflow-hidden group">
-                    <!-- Ambient corner highlight -->
-                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
-
-                    <div class="flex items-center justify-between pb-3 border-b border-white/15">
-                        <span class="text-xs font-bold text-white tracking-wide flex items-center gap-2">
-                            <span class="relative flex h-2.5 w-2.5">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
-                            </span>
-                            Layanan Kampus Aktif
-                        </span>
-                        <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-200 px-2.5 py-0.5 rounded-full border border-emerald-400/30 backdrop-blur-sm">Siap Antar</span>
+                <div class="w-full max-w-xs bg-[#0A1D13] border border-emerald-500/30 rounded-2xl p-5 shadow-2xl relative">
+                    <!-- Top Status Bar -->
+                    <div class="flex items-center justify-between pb-3.5 border-b border-emerald-900/60">
+                        <div class="flex items-center gap-2">
+                            <span class="flex h-2 w-2 rounded-full bg-emerald-400"></span>
+                            <span class="text-xs font-bold text-white tracking-wide">Layanan Kampus Aktif</span>
+                        </div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full border border-emerald-500/40">Siap Antar</span>
                     </div>
 
-                    <div class="mt-3.5 space-y-2.5 text-xs">
-                        <div class="flex items-center gap-3 bg-white/10 hover:bg-white/15 transition-colors duration-200 rounded-xl p-3 border border-white/10">
-                            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/15 text-emerald-200 shadow-xs">
+                    <!-- Service Highlight Items -->
+                    <div class="mt-3.5 space-y-2.5">
+                        <!-- Item 1: Antar Cepat -->
+                        <div class="flex items-center gap-3 bg-[#11281B] hover:bg-[#163323] transition-colors duration-150 rounded-xl p-3 border border-emerald-900/50">
+                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
                                 <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
-                            </span>
+                            </div>
                             <div class="min-w-0">
-                                <div class="font-bold text-white text-[12px] leading-snug">Antar Cepat ke Kelas</div>
-                                <div class="text-[11px] text-[#BFD4C7] leading-tight mt-0.5">Estimasi 10–20 Menit</div>
+                                <div class="font-bold text-white text-xs leading-snug">Antar Cepat ke Kelas</div>
+                                <div class="text-[11px] text-emerald-200/75 leading-tight mt-0.5">Estimasi 10–20 Menit</div>
                             </div>
                         </div>
 
-                        <div class="flex items-center gap-3 bg-white/10 hover:bg-white/15 transition-colors duration-200 rounded-xl p-3 border border-white/10">
-                            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/15 text-amber-200 shadow-xs">
+                        <!-- Item 2: QRIS & Transfer -->
+                        <div class="flex items-center gap-3 bg-[#11281B] hover:bg-[#163323] transition-colors duration-150 rounded-xl p-3 border border-emerald-900/50">
+                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/30">
                                 <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
-                            </span>
+                            </div>
                             <div class="min-w-0">
-                                <div class="font-bold text-white text-[12px] leading-snug">QRIS & Transfer Instan</div>
-                                <div class="text-[11px] text-[#BFD4C7] leading-tight mt-0.5">Tanpa repot uang kembalian</div>
+                                <div class="font-bold text-white text-xs leading-snug">QRIS & Transfer Instan</div>
+                                <div class="text-[11px] text-emerald-200/75 leading-tight mt-0.5">Tanpa repot uang kembalian</div>
                             </div>
                         </div>
 
-                        <div class="flex items-center gap-3 bg-white/10 hover:bg-white/15 transition-colors duration-200 rounded-xl p-3 border border-white/10">
-                            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/15 text-sky-200 shadow-xs">
+                        <!-- Item 3: Warung Terverifikasi -->
+                        <div class="flex items-center gap-3 bg-[#11281B] hover:bg-[#163323] transition-colors duration-150 rounded-xl p-3 border border-emerald-900/50">
+                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-500/20 text-teal-400 border border-teal-500/30">
                                 <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                            </span>
+                            </div>
                             <div class="min-w-0">
-                                <div class="font-bold text-white text-[12px] leading-snug">Warung Terverifikasi</div>
-                                <div class="text-[11px] text-[#BFD4C7] leading-tight mt-0.5">Menu higienis harga mahasiswa</div>
+                                <div class="font-bold text-white text-xs leading-snug">Warung Terverifikasi</div>
+                                <div class="text-[11px] text-emerald-200/75 leading-tight mt-0.5">Menu higienis harga mahasiswa</div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Bottom Coverage Info -->
+                    <div class="mt-3.5 pt-3 border-t border-emerald-900/60 flex items-center justify-between text-[11px] text-emerald-300/80">
+                        <span class="flex items-center gap-1.5 font-medium">
+                            <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                            Tarif Flat Kampus
+                        </span>
+                        <span class="font-bold text-white bg-emerald-900/80 px-2 py-0.5 rounded-md border border-emerald-500/30">Rp 3.000</span>
                     </div>
                 </div>
             </div>
