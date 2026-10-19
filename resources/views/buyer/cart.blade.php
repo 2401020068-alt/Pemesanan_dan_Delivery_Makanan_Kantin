@@ -16,36 +16,46 @@
                 <!-- Shop Info Banner -->
                 <!-- Shop Info Banner -->
                 @if(isset($shops) && count($shops) > 1)
-                    <div class="bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-100 border border-emerald-300 rounded-2xl p-4 flex items-center justify-between shadow-xs">
-                        <div class="flex items-center gap-3">
-                            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-700 text-white font-bold text-xs shadow-xs">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    <div class="bg-gradient-to-r from-[#EAF2ED] via-[#F2F7F4] to-[#E3ECE6] border border-[#BFD4C7] rounded-2xl p-4 sm:p-4.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3.5 shadow-xs">
+                        <div class="flex items-center gap-3.5">
+                            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#1F3E2C] text-white shadow-xs">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
                             </span>
                             <div>
-                                <h3 class="font-display font-bold text-emerald-950 text-sm flex items-center gap-2">
-                                    Pesanan Multi-Kantin
-                                    <span class="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded-full font-bold">{{ count($shops) }} Kantin</span>
-                                </h3>
-                                <p class="text-[11px] text-emerald-800/80 mt-0.5">Bisa pesan menu dari kantin berbeda sekaligus dalam satu keranjang.</p>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <h3 class="font-display font-bold text-[#1A241E] text-sm sm:text-base">
+                                        Pesanan Multi-Kantin
+                                    </h3>
+                                    <span class="text-[10px] bg-[#1F3E2C] text-white px-2 py-0.5 rounded-lg font-bold tracking-wide">
+                                        {{ count($shops) }} Kantin
+                                    </span>
+                                </div>
+                                <p class="text-xs text-[#526357] mt-0.5">Bisa pesan menu dari kantin berbeda sekaligus dalam satu keranjang.</p>
                             </div>
                         </div>
-                        <a href="{{ route('buyer.canteens') }}" class="text-xs font-semibold text-emerald-800 hover:text-emerald-900 hover:underline">
-                            + Tambah dari Kantin Lain
+                        <a href="{{ route('buyer.canteens') }}" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#1F3E2C] hover:bg-[#2A523A] text-white text-xs font-bold shadow-xs hover:shadow-md transition-all duration-200 active:scale-95 shrink-0 self-start sm:self-auto">
+                            <svg class="w-3.5 h-3.5 text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <span>Tambah dari Kantin Lain</span>
                         </a>
                     </div>
                 @elseif($shop)
-                    <div class="bg-[#E3ECE6] border border-[#BFD4C7] rounded-2xl p-4 flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#1F3E2C] text-white font-bold text-xs">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    <div class="bg-gradient-to-r from-[#EAF2ED] via-[#F2F7F4] to-[#E3ECE6] border border-[#BFD4C7] rounded-2xl p-4 sm:p-4.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3.5 shadow-xs">
+                        <div class="flex items-center gap-3.5">
+                            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#1F3E2C] text-white shadow-xs">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
                             </span>
                             <div>
-                                <h3 class="font-display font-bold text-[#1A241E] text-sm">{{ $shop->name }}</h3>
-                                <p class="text-[11px] text-[#4A584F]">{{ $shop->location }}</p>
+                                <h3 class="font-display font-bold text-[#1A241E] text-sm sm:text-base">{{ $shop->name }}</h3>
+                                <p class="text-xs text-[#526357] mt-0.5">{{ $shop->location }}</p>
                             </div>
                         </div>
-                        <a href="{{ route('buyer.canteens.show', $shop->id) }}" class="text-xs font-semibold text-[#1F3E2C] hover:underline">
-                            + Tambah Menu Lain
+                        <a href="{{ route('buyer.canteens.show', $shop->id) }}" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#1F3E2C] hover:bg-[#2A523A] text-white text-xs font-bold shadow-xs hover:shadow-md transition-all duration-200 active:scale-95 shrink-0 self-start sm:self-auto">
+                            <svg class="w-3.5 h-3.5 text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <span>Tambah Menu Lain</span>
                         </a>
                     </div>
                 @endif
