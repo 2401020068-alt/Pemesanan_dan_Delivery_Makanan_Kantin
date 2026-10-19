@@ -95,8 +95,10 @@
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-emerald-900/50 bg-[#03150e]/80 backdrop-blur-sm py-6 text-center text-xs text-slate-400">
-        <p>&copy; 2026 KantinKu - Proyek Praktikum Pemrograman Web Framework Laravel. Dibuat dengan rapi & terstruktur.</p>
+    <footer class="border-t border-emerald-900/50 bg-[#03150e]/80 backdrop-blur-sm py-6">
+        <div class="text-center text-xs text-emerald-300/40">
+            &copy; 2026 KantinKu Platform Pemesanan Kantin Kampus Digital.
+        </div>
     </footer>
 </body>
 </html>

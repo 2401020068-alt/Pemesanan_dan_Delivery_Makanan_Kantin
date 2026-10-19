@@ -61,7 +61,6 @@
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
             <span>Kembali ke Beranda</span>
         </a>
-        <span class="text-[11px] font-medium text-emerald-400/80 bg-emerald-950/40 px-3 py-1 rounded-full border border-emerald-500/10">Kantin Kampus Online</span>
     </div>
 
     <!-- Main Content Container -->
@@ -132,7 +131,7 @@
 
     <!-- Footer Copyright -->
     <div class="text-center text-xs text-emerald-300/40 mt-6">
-        &copy; 2026 KantinKu. Sistem Pemesanan Kantin Kampus Modern.
+        &copy; 2026 KantinKu Platform Pemesanan Kantin Kampus Digital.
     </div>
 
     <script>
