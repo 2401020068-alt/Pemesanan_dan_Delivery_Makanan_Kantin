@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Checkout Pesanan')
+@section('title', 'Konfirmasi Pesanan')
 
 @section('content')
 <div class="max-w-4xl mx-auto space-y-6">
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="font-display text-2xl font-bold text-[#1A241E]">Checkout Pesanan</h1>
+            <h1 class="font-display text-2xl font-bold text-[#1A241E]">Konfirmasi Pesanan</h1>
             <p class="text-xs sm:text-sm text-[#76847B] mt-1">Lengkapi alamat pengantaran dan pilih metode pembayaran.</p>
         </div>
         <a href="{{ route('buyer.cart') }}" class="text-xs font-semibold text-[#1F3E2C] hover:underline">Kembali ke Keranjang</a>
@@ -29,11 +29,11 @@
                     <div>
                         <label class="block text-xs font-semibold text-[#1A241E] mb-1">Gedung / Ruangan / Titik Temu di Kampus *</label>
                         <input type="text" name="address" required value="{{ old('address', $buyer->address ?? 'Gedung Fakultas Teknik, Ruang 3.12') }}" placeholder="Contoh: Gedung Fakultas Teknik, Ruang 3.12" class="w-full rounded-xl border border-[#E5ECE7] px-3.5 py-2.5 text-sm text-[#1A241E] focus:border-[#1F3E2C] focus:outline-none focus:ring-2 focus:ring-[#1F3E2C]/20">
-                        <p class="text-[11px] text-[#76847B] mt-1">Driver kantin akan mengantarkan pesanan langsung ke lokasi ini.</p>
+                        <p class="text-[11px] text-[#76847B] mt-1">Kurir kantin akan mengantarkan pesanan langsung ke lokasi ini.</p>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-[#1A241E] mb-1">Catatan Tambahan untuk Penjual / Driver (Opsional)</label>
+                        <label class="block text-xs font-semibold text-[#1A241E] mb-1">Catatan Tambahan untuk Penjual / Kurir (Opsional)</label>
                         <textarea name="note" rows="2" placeholder="Contoh: Sambal dipisah, tolong antarkan sebelum jam 12.00" class="w-full rounded-xl border border-[#E5ECE7] px-3.5 py-2.5 text-sm text-[#1A241E] focus:border-[#1F3E2C] focus:outline-none focus:ring-2 focus:ring-[#1F3E2C]/20"></textarea>
                     </div>
                 </div>

@@ -21,8 +21,8 @@
             ['key' => 'created', 'label' => 'Pesanan Dibuat', 'desc' => 'Menunggu Pembayaran'],
             ['key' => 'paid', 'label' => 'Pembayaran Valid', 'desc' => 'Diverifikasi Penjual'],
             ['key' => 'processing', 'label' => 'Sedang Dimasak', 'desc' => 'Dapur Warung'],
-            ['key' => 'ready', 'label' => 'Siap Diantar', 'desc' => 'Menunggu Driver'],
-            ['key' => 'delivering', 'label' => 'Dalam Perjalanan', 'desc' => 'Driver Mengantar'],
+            ['key' => 'ready', 'label' => 'Siap Diantar', 'desc' => 'Menunggu Kurir'],
+            ['key' => 'delivering', 'label' => 'Dalam Perjalanan', 'desc' => 'Kurir Mengantar'],
             ['key' => 'done', 'label' => 'Pesanan Selesai', 'desc' => 'Telah Diterima'],
         ];
 
@@ -135,7 +135,7 @@
                 @endif
 
                 <div class="space-y-1 pt-2 border-t border-[#E5ECE7]">
-                    <span class="text-[10px] text-[#76847B] font-semibold uppercase">Driver Pengantar</span>
+                    <span class="text-[10px] text-[#76847B] font-semibold uppercase">Kurir Pengantar</span>
                     @if($order->driver)
                         <div class="flex items-center gap-2 mt-1">
                             <img src="{{ $order->driver->avatar ?? 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=70' }}" class="w-7 h-7 rounded-full object-cover">
@@ -145,15 +145,23 @@
                             </div>
                         </div>
                     @else
-                        <p class="text-[#76847B] italic">Menunggu driver mengambil pesanan...</p>
+                        <p class="text-[#76847B] italic">Menunggu kurir mengambil pesanan...</p>
                     @endif
                 </div>
 
                 <div class="space-y-1 pt-2 border-t border-[#E5ECE7]">
                     <span class="text-[10px] text-[#76847B] font-semibold uppercase">Status Pembayaran</span>
                     <div class="mt-1">
+                        @php
+                            $payStatusLabels = [
+                                'verified' => 'Terverifikasi',
+                                'pending' => 'Menunggu Verifikasi',
+                                'unpaid' => 'Belum Dibayar',
+                                'rejected' => 'Ditolak',
+                            ];
+                        @endphp
                         <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold {{ $order->payment_status === 'verified' ? 'bg-[#E3ECE6] text-[#1F3E2C] border border-[#BFD4C7]' : ($order->payment_status === 'pending' ? 'bg-[#F1F5F2] text-[#2D553D] border border-[#BFD4C7]' : 'bg-[#F6F3EF] text-[#A68A68] border border-[#E5ECE7]') }}">
-                            {{ ucfirst($order->payment_status) }} ({{ $order->payment_method }})
+                            {{ $payStatusLabels[$order->payment_status] ?? ucfirst($order->payment_status) }} ({{ $order->payment_method }})
                         </span>
                     </div>
                 </div>

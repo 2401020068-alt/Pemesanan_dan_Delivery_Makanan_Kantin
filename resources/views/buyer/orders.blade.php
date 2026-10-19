@@ -99,7 +99,7 @@
             <div class="bg-white rounded-3xl border border-dashed border-[#C8D6CD] p-12 text-center shadow-subtle">
                 <svg class="w-12 h-12 text-[#76847B] mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
                 <p class="font-display font-bold text-[#1A241E]">Belum ada pesanan</p>
-                <p class="text-xs text-[#76847B] mt-1">Pesanan Anda akan muncul di sini setelah Anda checkout.</p>
+                <p class="text-xs text-[#76847B] mt-1">Pesanan Anda akan muncul di sini setelah Anda menyelesaikan pemesanan.</p>
             </div>
         @endforelse
     </div>

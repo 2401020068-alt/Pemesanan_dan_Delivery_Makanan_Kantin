@@ -379,7 +379,7 @@
                 </a>
                 <a href="{{ route('logout') }}" class="flex items-center gap-3 w-full px-3 py-2 rounded-xl text-xs font-semibold text-[#C25454] hover:bg-[#FDF3F3] transition">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                    <span>Keluar (Logout)</span>
+                    <span>Keluar</span>
                 </a>
             </div>
         </aside>
@@ -410,7 +410,7 @@
                         <img src="{{ $authUser->avatar ?? 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=70' }}" alt="{{ $authUser->name }}" class="w-8 h-8 rounded-full object-cover ring-2 {{ $isEmeraldPage ? 'ring-emerald-400/40' : 'ring-[#BFD4C7]' }} shadow-xs">
                         <div class="hidden sm:block text-left leading-none">
                             <div class="text-xs font-bold {{ $isEmeraldPage ? 'text-white' : 'text-[#1A241E]' }} truncate max-w-[120px]">{{ $authUser->name }}</div>
-                            <span class="text-[10px] {{ $isEmeraldPage ? 'text-emerald-300' : 'text-[#76847B]' }} font-medium capitalize">{{ $authUser->role }}</span>
+                            <span class="text-[10px] {{ $isEmeraldPage ? 'text-emerald-300' : 'text-[#76847B]' }} font-medium">{{ ['buyer' => 'Pembeli', 'seller' => 'Penjual', 'driver' => 'Kurir', 'admin' => 'Admin'][$authUser->role] ?? ucfirst($authUser->role) }}</span>
                         </div>
                     </div>
                 </div>

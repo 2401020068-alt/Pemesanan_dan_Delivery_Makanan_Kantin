@@ -87,10 +87,10 @@
         <form action="{{ route('buyer.payment.submit', $order->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4 pt-4 border-t border-[#E5ECE7]">
             @csrf
             <div>
-                <label class="block text-xs font-semibold text-[#1A241E] mb-1.5">Unggah Bukti Transfer / Screenshot Pembayaran</label>
+                <label class="block text-xs font-semibold text-[#1A241E] mb-1.5">Unggah Bukti Transfer / Tangkapan Layar Pembayaran</label>
                 <div class="border-2 border-dashed border-[#C8D6CD] rounded-2xl p-5 text-center hover:border-[#1F3E2C] bg-[#FAFBF9] cursor-pointer">
                     <input type="file" name="proof" id="proofInput" accept="image/*" class="w-full text-xs text-[#76847B] file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#E3ECE6] file:text-[#1F3E2C] hover:file:bg-[#BFD4C7]">
-                    <p class="text-[11px] text-[#76847B] mt-2">Format: JPG, PNG, atau screenshot HP. (Jika tidak diisi, bukti demo otomatis dilampirkan).</p>
+                    <p class="text-[11px] text-[#76847B] mt-2">Format: JPG, PNG, atau tangkapan layar ponsel. (Jika tidak diisi, bukti demo otomatis dilampirkan).</p>
                 </div>
             </div>
 

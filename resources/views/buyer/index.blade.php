@@ -36,7 +36,7 @@
                     </div>
                     <input type="text" name="q" value="{{ $search }}" placeholder="Cari nasi goreng, mie ayam, kopi, jus..." class="w-full bg-transparent text-[#1A241E] placeholder-[#76847B] text-sm py-2 px-1 focus:outline-none font-medium">
                     @if($search)
-                        <a href="{{ route('buyer.index') }}" class="p-1.5 mr-1 text-[#76847B] hover:text-[#1A241E] rounded-lg transition" title="Reset">
+                        <a href="{{ route('buyer.index') }}" class="p-1.5 mr-1 text-[#76847B] hover:text-[#1A241E] rounded-lg transition" title="Hapus pencarian">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                         </a>
                     @endif
@@ -66,7 +66,7 @@
             </span>
             <div>
                 <h4 class="text-xs font-bold text-[#1A241E]">Antar Cepat ke Ruangan</h4>
-                <p class="text-[11px] text-[#76847B] mt-0.5">Driver standby di tiap fakultas</p>
+                <p class="text-[11px] text-[#76847B] mt-0.5">Kurir siaga di tiap fakultas</p>
             </div>
         </div>
         <div class="group bg-white hover:bg-[#F9FAF9] rounded-2xl border border-[#E5ECE7] hover:border-[#A68A68]/40 p-4 flex items-center gap-3.5 shadow-subtle hover:shadow-md transition-all duration-200">

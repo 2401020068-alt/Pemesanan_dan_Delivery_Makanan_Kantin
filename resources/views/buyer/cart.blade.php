@@ -147,7 +147,7 @@
                     </div>
 
                     <a href="{{ route('buyer.checkout') }}" class="flex items-center justify-center w-full py-3.5 rounded-2xl bg-[#1F3E2C] hover:bg-[#2D553D] text-white font-bold text-sm shadow-subtle transition active:scale-98">
-                        <span>Lanjut ke Checkout</span>
+                        <span>Lanjut ke Pembayaran</span>
                     </a>
                 </div>
             </div>
