@@ -24,8 +24,7 @@
                 <div>
                     <div class="relative h-44 w-full overflow-hidden bg-[#F4F6F4]">
                         <img src="{{ $canteen->image ?? 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=70' }}" alt="{{ $canteen->name }}" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <span class="inline-flex items-center gap-1.5 absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-bold {{ $canteen->open ? 'bg-[#1F3E2C]/95 text-white' : 'bg-[#173022]/85 text-[#BFD4C7]' }} backdrop-blur-md shadow-xs">
-                            <span class="w-1.5 h-1.5 rounded-full {{ $canteen->open ? 'bg-white animate-pulse' : 'bg-[#76847B]' }}"></span>
+                        <span class="inline-flex items-center justify-center absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-bold {{ $canteen->open ? 'bg-[#1F3E2C]/95 text-white' : 'bg-[#173022]/85 text-[#BFD4C7]' }} backdrop-blur-md shadow-xs">
                             {{ $canteen->open ? 'Sedang Buka' : 'Tutup' }}
                         </span>
                     </div>

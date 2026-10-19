@@ -51,7 +51,7 @@
                         </span>
                         <div>
                             <h2 class="font-display font-bold text-[#1A241E] text-sm sm:text-base">{{ $order->shop->name ?? 'Warung Kantin' }}</h2>
-                            <span class="text-[11px] text-[#76847B] font-mono">{{ $order->id }} &bull; {{ $order->created_at->format('d M Y, H:i') }}</span>
+                            <span class="text-[11px] text-[#76847B] font-mono">{{ $order->id }} - {{ $order->created_at->format('d M Y, H:i') }}</span>
                         </div>
                     </div>
 

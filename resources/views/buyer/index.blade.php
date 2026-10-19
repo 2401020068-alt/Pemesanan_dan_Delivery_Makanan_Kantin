@@ -44,7 +44,6 @@
                         @endif
                         <button type="submit" class="shrink-0 rounded-xl bg-gradient-to-r from-[#A68A68] to-[#8E7252] hover:from-[#B89A74] hover:to-[#9E805E] px-5 py-2.5 text-sm font-bold text-white shadow-xs transition-all active:scale-95 flex items-center gap-1.5">
                             <span>Cari</span>
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </button>
                     </div>
 
@@ -164,9 +163,8 @@
         </div>
         <div class="flex items-center gap-2.5 overflow-x-auto pb-1 scrollbar-none">
             @foreach($categories as $cat)
-                <a href="{{ route('buyer.index', ['category' => $cat, 'q' => $search]) }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap {{ $category === $cat ? 'bg-[#1F3E2C] text-white shadow-subtle' : 'bg-white text-[#4A584F] border border-[#E5ECE7] hover:bg-[#F1F5F2] hover:border-[#C8D6CD]' }}">
-                    <span class="w-1.5 h-1.5 rounded-full {{ $category === $cat ? 'bg-white' : 'bg-[#709981]' }}"></span>
-                    <span>{{ $cat }}</span>
+                <a href="{{ route('buyer.index', ['category' => $cat, 'q' => $search]) }}" class="inline-flex items-center justify-center px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap {{ $category === $cat ? 'bg-[#1F3E2C] text-white shadow-subtle' : 'bg-white text-[#4A584F] border border-[#E5ECE7] hover:bg-[#F1F5F2] hover:border-[#C8D6CD]' }}">
+                    {{ $cat }}
                 </a>
             @endforeach
         </div>
@@ -191,8 +189,7 @@
                         <img src="{{ $shop->image ?? 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=70' }}" alt="{{ $shop->name }}" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                         <div class="absolute top-3 right-3">
-                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold {{ $shop->open ? 'bg-[#1F3E2C]/90 text-white' : 'bg-[#1A241E]/80 text-[#BFD4C7]' }} backdrop-blur-md">
-                                <span class="w-1.5 h-1.5 rounded-full {{ $shop->open ? 'bg-white animate-pulse' : 'bg-[#76847B]' }}"></span>
+                            <span class="inline-flex items-center justify-center px-2.5 py-1 rounded-full text-[11px] font-bold {{ $shop->open ? 'bg-[#1F3E2C]/90 text-white' : 'bg-[#1A241E]/80 text-[#BFD4C7]' }} backdrop-blur-md">
                                 {{ $shop->open ? 'Buka' : 'Tutup' }}
                             </span>
                         </div>

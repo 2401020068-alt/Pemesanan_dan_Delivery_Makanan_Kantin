@@ -8,7 +8,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
             <h1 class="font-display text-2xl font-bold text-[#1A241E]">Katalog Menu Kantin</h1>
-            <p class="text-xs sm:text-sm text-[#76847B] mt-1">Jelajahi semua makanan, minuman, dan camilan di seluruh kantin kampus.</p>
+            <p class="text-xs sm:text-sm text-[#76847B] mt-1">Jelajahi semua makanan, minuman, dan cemilan di seluruh kantin kampus.</p>
         </div>
 
         <form action="{{ route('buyer.menu') }}" method="GET" class="flex gap-2 max-w-sm w-full">

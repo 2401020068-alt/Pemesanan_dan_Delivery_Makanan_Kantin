@@ -10,7 +10,7 @@
                 <h1 class="font-display text-2xl font-bold text-[#1A241E]">{{ $order->id }}</h1>
                 <span class="text-xs font-mono text-[#76847B]">({{ $order->trx_id }})</span>
             </div>
-            <p class="text-xs text-[#76847B] mt-1">Dipesan pada {{ $order->created_at->format('d F Y, H:i') }} WIB &bull; Warung: {{ $order->shop->name ?? 'Kantin' }}</p>
+            <p class="text-xs text-[#76847B] mt-1">Dipesan pada {{ $order->created_at->format('d F Y, H:i') }} WIB - Warung: {{ $order->shop->name ?? 'Kantin' }}</p>
         </div>
         <a href="{{ route('buyer.orders') }}" class="text-xs font-semibold text-[#1F3E2C] hover:underline">Kembali ke Daftar Pesanan</a>
     </div>

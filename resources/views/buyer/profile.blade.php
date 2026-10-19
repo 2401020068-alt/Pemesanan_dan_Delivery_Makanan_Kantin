@@ -14,8 +14,7 @@
             <img src="{{ $buyer->avatar ?? 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=70' }}" class="w-16 h-16 rounded-2xl object-cover ring-4 ring-emerald-500/25 shadow-sm">
             <div>
                 <h2 class="font-display font-bold text-lg sm:text-xl text-slate-900">{{ $buyer->name }}</h2>
-                <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 capitalize mt-1 border border-emerald-200/60">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                <span class="inline-flex items-center justify-center px-3 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 capitalize mt-1 border border-emerald-200/60">
                     {{ $buyer->role }}
                 </span>
             </div>
