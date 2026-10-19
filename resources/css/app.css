@@ -1,0 +1,125 @@
+/* Earthy Moss Elegance - Design System Tokens */
+:root {
+  /* Brand Moss Scale */
+  --moss-900: #173022;
+  --moss-800: #1F3E2C;
+  --moss-700: #2D553D;
+  --moss-600: #3F6E52;
+  --moss-400: #709981;
+  --moss-200: #BFD4C7;
+  --moss-100: #E3ECE6;
+  --moss-50:  #F1F5F2;
+
+  /* Neutrals */
+  --canvas-bg: #FAFBF9;
+  --surface-card: #FFFFFF;
+  --surface-alt: #F4F6F4;
+  --border-light: #E5ECE7;
+  --border-medium: #C8D6CD;
+
+  /* Typography */
+  --text-heading: #1A241E;
+  --text-body: #4A584F;
+  --text-muted: #76847B;
+  --text-inverse: #FFFFFF;
+
+  /* Warm Earth Accents */
+  --accent-sand: #A68A68;
+  --accent-sand-soft: #F6F3EF;
+
+  /* Gradients */
+  --grad-hero: radial-gradient(circle at 75% 45%, #E3EBE5 0%, #FAFBF9 70%);
+  --grad-card-moss: linear-gradient(145deg, #1F3E2C 0%, #2A533B 100%);
+  --grad-ribbon: linear-gradient(90deg, #173022 0%, #224732 50%, #173022 100%);
+  --grad-surface-subtle: linear-gradient(180deg, #FFFFFF 0%, #F5F8F6 100%);
+
+  /* Shadows (Natural & Soft) */
+  --shadow-subtle: 0 4px 16px rgba(23, 48, 34, 0.04);
+  --shadow-float: 0 8px 24px rgba(23, 48, 34, 0.08);
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--canvas-bg);
+  color: var(--text-body);
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text-heading);
+}
+
+/* Card Styles */
+.card-subtle {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  box-shadow: var(--shadow-subtle);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card-subtle:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-float);
+  border-color: var(--border-medium);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--moss-800);
+  color: var(--text-inverse);
+  font-weight: 600;
+  border-radius: 12px;
+  transition: background-color 0.18s ease;
+}
+.btn-primary:hover {
+  background-color: var(--moss-700);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--moss-800);
+  border: 1px solid var(--border-medium);
+  font-weight: 600;
+  border-radius: 12px;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+.btn-secondary:hover {
+  background-color: var(--moss-50);
+  border-color: var(--moss-400);
+}
+
+.btn-sand {
+  background-color: var(--accent-sand-soft);
+  color: var(--moss-800);
+  border: 1px solid var(--border-medium);
+  font-weight: 600;
+  border-radius: 12px;
+  transition: background-color 0.18s ease;
+}
+.btn-sand:hover {
+  background-color: #EFE9DF;
+}
+
+/* Form Inputs */
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-heading);
+  border-radius: 12px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):focus,
+select:focus,
+textarea:focus {
+  border-color: var(--moss-800) !important;
+  box-shadow: 0 0 0 3px rgba(31, 62, 44, 0.12) !important;
+  outline: none !important;
+}
+
+::placeholder {
+  color: var(--text-muted);
+}
