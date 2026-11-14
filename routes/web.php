@@ -47,6 +47,7 @@ Route::prefix('buyer')->name('buyer.')->group(function () {
 
 // Seller Routes
 Route::prefix('seller')->name('seller.')->group(function () {
+    Route::get('/pending', [SellerController::class, 'pending'])->name('pending');
     Route::get('/', [SellerController::class, 'index'])->name('index');
     Route::get('/orders', [SellerController::class, 'orders'])->name('orders');
     Route::get('/orders/{id}', [SellerController::class, 'orderDetail'])->name('orders.show');

@@ -36,7 +36,7 @@ class SellerController extends Controller
                 'owner_id' => $seller->id,
                 'name' => 'Warung ' . $seller->name,
                 'description' => 'Warung kantin resmi milik ' . $seller->name,
-                'location' => 'Kantin Kampus',
+                'location' => 'Kantin Senggarang',
                 'hours' => '08.00 - 17.00',
                 'open' => true,
                 'approval' => 'approved',
@@ -46,8 +46,18 @@ class SellerController extends Controller
         return $shop;
     }
 
+    protected function checkApproval()
+    {
+        $seller = $this->getSeller();
+        if ($seller && $seller->role === 'seller' && $seller->approval !== 'approved') {
+            return redirect()->route('seller.pending');
+        }
+        return null;
+    }
+
     public function index()
     {
+        if ($redirect = $this->checkApproval()) return $redirect;
         $seller = $this->getSeller();
         $shop = $this->getShop();
 
@@ -64,6 +74,7 @@ class SellerController extends Controller
 
     public function orders(Request $request)
     {
+        if ($redirect = $this->checkApproval()) return $redirect;
         $seller = $this->getSeller();
         $shop = $this->getShop();
         $status = $request->query('status', 'all');
@@ -101,6 +112,7 @@ class SellerController extends Controller
 
     public function shop()
     {
+        if ($redirect = $this->checkApproval()) return $redirect;
         $seller = $this->getSeller();
         $shop = $this->getShop();
         $menuItems = MenuItem::where('shop_id', $shop->id)->latest()->get();
@@ -114,14 +126,13 @@ class SellerController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:100',
-            'location' => 'nullable|string',
             'hours' => 'nullable|string',
             'description' => 'nullable|string',
         ]);
 
         $shop->update([
             'name' => $request->name,
-            'location' => $request->location,
+            'location' => 'Kantin Senggarang',
             'hours' => $request->hours,
             'description' => $request->description,
             'open' => $request->has('open'),
@@ -204,6 +215,7 @@ class SellerController extends Controller
 
     public function payments()
     {
+        if ($redirect = $this->checkApproval()) return $redirect;
         $seller = $this->getSeller();
         $shop = $this->getShop();
         $orders = Order::with('buyer')->where('shop_id', $shop->id)->whereIn('payment_status', ['pending', 'verified', 'rejected'])->latest()->get();
@@ -233,6 +245,16 @@ class SellerController extends Controller
         }
 
         return back()->with('success', $msg);
+    }
+
+    public function pending()
+    {
+        $seller = $this->getSeller();
+        // Kalau sudah approved, langsung ke dashboard
+        if ($seller && $seller->approval === 'approved') {
+            return redirect()->route('seller.index');
+        }
+        return view('seller.pending', compact('seller'));
     }
 
     public function profile()

@@ -15,6 +15,7 @@
                 <thead class="bg-[#F4F6F4] uppercase text-[10px] font-bold text-[#76847B] tracking-wider">
                     <tr>
                         <th class="px-5 py-3.5">Nama &amp; Kontak</th>
+                        <th class="px-5 py-3.5">Warung</th>
                         <th class="px-5 py-3.5">Email</th>
                         <th class="px-5 py-3.5">No. HP</th>
                         <th class="px-5 py-3.5">Status Akun</th>
@@ -31,6 +32,12 @@
                                     <span class="font-bold text-[#1A241E] block text-xs">{{ $sel->name }}</span>
                                     <span class="text-[10px] text-[#76847B] font-mono">{{ $sel->id }}</span>
                                 </div>
+                            </td>
+                            <td class="px-5 py-3.5">
+                                <span class="font-semibold text-xs text-[#1A241E] block">{{ $sel->shop->name ?? 'Belum ada warung' }}</span>
+                                @if($sel->shop)
+                                    <span class="text-[10px] text-[#76847B]">{{ $sel->shop->location }}</span>
+                                @endif
                             </td>
                             <td class="px-5 py-3.5 text-[#4A584F]">{{ $sel->email }}</td>
                             <td class="px-5 py-3.5 font-mono text-[#4A584F]">{{ $sel->phone ?? '-' }}</td>
@@ -71,7 +78,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-5 py-12 text-center text-[#76847B]">
+                            <td colspan="7" class="px-5 py-12 text-center text-[#76847B]">
                                 <div class="max-w-xs mx-auto space-y-2">
                                     <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>

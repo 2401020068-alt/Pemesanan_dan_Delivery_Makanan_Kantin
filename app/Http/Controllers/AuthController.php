@@ -87,7 +87,7 @@ class AuthController extends Controller
             'phone' => $request->phone,
             'role' => $request->role,
             'status' => 'active',
-            'approval' => $request->role === 'seller' ? 'approved' : null,
+            'approval' => $request->role === 'seller' ? 'pending' : null,
             'avatar' => 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=70',
             'password' => Hash::make($request->password),
         ]);
@@ -101,10 +101,10 @@ class AuthController extends Controller
                 'owner_id' => $user->id,
                 'name' => 'Warung ' . $user->name,
                 'description' => 'Warung kantin resmi milik ' . $user->name,
-                'location' => 'Kantin Kampus',
+                'location' => 'Kantin Senggarang',
                 'hours' => '08.00 - 17.00',
                 'open' => true,
-                'approval' => 'approved',
+                'approval' => 'pending',
                 'submitted' => date('Y-m-d'),
             ]);
         }

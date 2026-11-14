@@ -70,9 +70,14 @@ class AdminController extends Controller
         $approval = $action === 'approve' ? 'approved' : 'rejected';
         $seller->update(['approval' => $approval]);
 
-        $this->logAction($action === 'approve' ? 'Menyetujui penjual' : 'Menolak penjual', "{$seller->name} ({$seller->id})");
+        // Opsi B: Auto-approve / reject warung milik penjual ini
+        if ($seller->shop) {
+            $seller->shop->update(['approval' => $approval]);
+        }
 
-        return back()->with('success', "Penjual {$seller->name} berhasil " . ($action === 'approve' ? 'disetujui.' : 'ditolak.'));
+        $this->logAction($action === 'approve' ? 'Menyetujui penjual & warung' : 'Menolak penjual & warung', "{$seller->name} ({$seller->id})");
+
+        return back()->with('success', "Penjual {$seller->name} beserta warungnya berhasil " . ($action === 'approve' ? 'disetujui.' : 'ditolak.'));
     }
 
     public function shops()
