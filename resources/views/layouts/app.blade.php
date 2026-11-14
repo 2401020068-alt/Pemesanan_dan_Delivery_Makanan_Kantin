@@ -251,6 +251,7 @@
         }
         $authUser = Auth::user() ?? (session('user_id') ? \App\Models\User::find(session('user_id')) : null) ?? \App\Models\User::where('role', $currentRole)->first() ?? \App\Models\User::first();
         $isEmeraldPage = request()->routeIs('*profile*') || request()->routeIs('*dispute*') || request()->is('*profile*') || request()->is('*dispute*');
+        $isProfilePage = request()->routeIs('*profile*') || request()->is('*profile*');
     @endphp
 
     <div class="min-h-screen flex">
@@ -371,11 +372,7 @@
 
             <!-- Bottom Tools -->
             <div class="pt-3 border-t border-[#E5ECE7] space-y-1">
-                <a href="{{ route('demo.reset') }}" onclick="return confirm('Reset semua data demo KantinKu ke kondisi awal?')" class="flex items-center gap-3 w-full px-3 py-2 rounded-xl text-xs font-semibold text-[#76847B] hover:bg-[#F6F3EF] hover:text-[#1A241E] transition">
-                    <svg class="w-4 h-4 text-[#A68A68]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                    <span>Reset Data Demo</span>
-                </a>
-                <a href="{{ route('logout') }}" class="flex items-center gap-3 w-full px-3 py-2 rounded-xl text-xs font-semibold text-[#C25454] hover:bg-[#FDF3F3] transition">
+<a href="{{ route('logout') }}" class="flex items-center gap-3 w-full px-3 py-2 rounded-xl text-xs font-semibold text-[#C25454] hover:bg-[#FDF3F3] transition">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                     <span>Keluar</span>
                 </a>
@@ -396,21 +393,23 @@
 
                 <!-- Top Right Controls -->
                 <div class="flex items-center gap-3 ml-auto">
-                    @if($currentRole === 'buyer')
-                        <a href="{{ route('buyer.cart') }}" class="relative p-2 rounded-xl border transition {{ $isEmeraldPage ? 'text-emerald-200 hover:text-white hover:bg-emerald-900/60 border-emerald-500/20' : 'text-[#4A584F] hover:text-[#1F3E2C] hover:bg-[#E3ECE6] border-transparent hover:border-[#BFD4C7]' }}" title="Keranjang Belanja">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                            <span class="cart-badge-count absolute top-1 right-1 flex h-4 min-w-[1rem] px-1 items-center justify-center rounded-full bg-emerald-600 text-[10px] font-bold text-white shadow-xs {{ $cartCount > 0 ? '' : 'hidden' }}">{{ $cartCount }}</span>
-                        </a>
-                    @endif
+                    @if(!$isProfilePage)
+                        @if($currentRole === 'buyer')
+                            <a href="{{ route('buyer.cart') }}" class="relative p-2 rounded-xl border transition {{ $isEmeraldPage ? 'text-emerald-200 hover:text-white hover:bg-emerald-900/60 border-emerald-500/20' : 'text-[#4A584F] hover:text-[#1F3E2C] hover:bg-[#E3ECE6] border-transparent hover:border-[#BFD4C7]' }}" title="Keranjang Belanja">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                <span class="cart-badge-count absolute top-1 right-1 flex h-4 min-w-[1rem] px-1 items-center justify-center rounded-full bg-emerald-600 text-[10px] font-bold text-white shadow-xs {{ $cartCount > 0 ? '' : 'hidden' }}">{{ $cartCount }}</span>
+                            </a>
+                        @endif
 
-                    <!-- User Pill Profile -->
-                    <div class="flex items-center gap-2.5">
-                        <img src="{{ $authUser->avatar ?? 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=70' }}" alt="{{ $authUser->name }}" class="w-8 h-8 rounded-full object-cover ring-2 {{ $isEmeraldPage ? 'ring-emerald-400/40' : 'ring-[#BFD4C7]' }} shadow-xs">
-                        <div class="hidden sm:block text-left leading-none">
-                            <div class="text-xs font-bold {{ $isEmeraldPage ? 'text-white' : 'text-[#1A241E]' }} truncate max-w-[120px]">{{ $authUser->name }}</div>
-                            <span class="text-[10px] {{ $isEmeraldPage ? 'text-emerald-300' : 'text-[#76847B]' }} font-medium">{{ ['buyer' => 'Pembeli', 'seller' => 'Penjual', 'driver' => 'Kurir', 'admin' => 'Admin'][$authUser->role] ?? ucfirst($authUser->role) }}</span>
+                        <!-- User Pill Profile -->
+                        <div class="flex items-center gap-2.5">
+                            <img src="{{ $authUser->avatar ?? 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=70' }}" alt="{{ $authUser->name }}" class="w-8 h-8 rounded-full object-cover ring-2 {{ $isEmeraldPage ? 'ring-emerald-400/40' : 'ring-[#BFD4C7]' }} shadow-xs">
+                            <div class="hidden sm:block text-left leading-none">
+                                <div class="text-xs font-bold {{ $isEmeraldPage ? 'text-white' : 'text-[#1A241E]' }} truncate max-w-[120px]">{{ $authUser->name }}</div>
+                                <span class="text-[10px] {{ $isEmeraldPage ? 'text-emerald-300' : 'text-[#76847B]' }} font-medium">{{ ['buyer' => 'Pembeli', 'seller' => 'Penjual', 'driver' => 'Kurir', 'admin' => 'Admin'][$authUser->role] ?? ucfirst($authUser->role) }}</span>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </header>
 
