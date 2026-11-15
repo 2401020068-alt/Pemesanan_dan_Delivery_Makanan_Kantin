@@ -21,16 +21,21 @@ class AdminController extends Controller
         $userId = session('user_id');
         if ($userId) {
             $user = User::find($userId);
-            if ($user) return $user;
+            if ($user && $user->role === 'admin') return $user;
         }
-        return auth()->user() ?? User::where('role', 'admin')->first();
+        return (auth()->check() && auth()->user()->role === 'admin' ? auth()->user() : null)
+            ?? User::where('role', 'admin')->first();
     }
 
     protected function logAction($action, $target, $status = 'success')
     {
         $admin = $this->getAdmin();
+        $maxLogId = ActivityLog::all()->map(function ($l) {
+            return (int) preg_replace('/\D/', '', $l->id);
+        })->max() ?? 0;
+
         ActivityLog::create([
-            'id' => 'l' . (ActivityLog::count() + 1),
+            'id' => 'l' . ($maxLogId + 1),
             'time' => now(),
             'admin' => $admin->name,
             'action' => $action,
@@ -58,7 +63,7 @@ class AdminController extends Controller
     public function sellers()
     {
         $admin = $this->getAdmin();
-        $sellers = User::where('role', 'seller')->latest()->get();
+        $sellers = User::with('shop')->where('role', 'seller')->latest()->get();
         return view('admin.sellers', compact('admin', 'sellers'));
     }
 
@@ -159,7 +164,7 @@ class AdminController extends Controller
             'role' => 'admin',
             'status' => $request->status ?? 'active',
             'approval' => null,
-            'avatar' => 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=70',
+            'avatar' => User::determineAvatarByName($request->name),
             'password' => Hash::make($request->password),
         ]);
 
@@ -348,9 +353,22 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:100',
             'phone' => 'nullable|string',
+            'avatar_file' => 'nullable|image|max:2048',
+            'avatar_preset' => 'nullable|string',
         ]);
 
-        $admin->update($request->only('name', 'phone'));
+        $data = $request->only('name', 'phone');
+
+        if ($request->hasFile('avatar_file')) {
+            $path = $request->file('avatar_file')->store('avatars', 'public');
+            $data['avatar'] = '/storage/' . $path;
+        } elseif ($request->filled('avatar_preset')) {
+            $data['avatar'] = $request->input('avatar_preset');
+        } elseif ($admin->name !== $request->name && (empty($admin->getRawOriginal('avatar')) || str_contains($admin->getRawOriginal('avatar'), 'unsplash.com'))) {
+            $data['avatar'] = User::determineAvatarByName($request->name);
+        }
+
+        $admin->update($data);
         return back()->with('success', 'Profil admin berhasil disimpan.');
     }
 }
