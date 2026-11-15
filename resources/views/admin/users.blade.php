@@ -89,7 +89,7 @@
                         @endphp
                         <tr class="hover:bg-[#FAFBF9] transition">
                             <td class="px-5 py-3.5 flex items-center gap-3">
-                                <img src="{{ $usr->avatar ?? 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=70' }}" class="w-9 h-9 rounded-full object-cover ring-2 ring-[#BFD4C7]/30 shrink-0">
+                                <img src="{{ asset(ltrim($usr->avatar, '/')) }}" class="w-9 h-9 rounded-full object-cover ring-2 ring-[#BFD4C7]/30 shrink-0 bg-[#FAFBF9]">
                                 <div class="min-w-0">
                                     <div class="flex items-center gap-1.5 flex-wrap">
                                         <span class="font-bold text-[#1A241E] text-xs truncate">{{ $usr->name }}</span>
