@@ -68,8 +68,3 @@ Gunakan **Dropdown Peran di Header** atau login dengan akun berikut (Password: `
 - **Pembeli:** `andi@student.ac.id`
 - **Penjual:** `siti@warung.id`
 - **Driver:** `budi.driver@kantinku.ac.id`
-
----
-
-## 📄 Laporan Proyek
-Dokumentasi lengkap proyek kuliah untuk Semester 5 dapat dilihat pada berkas [LAPORAN_PROYEK.md](LAPORAN_PROYEK.md).

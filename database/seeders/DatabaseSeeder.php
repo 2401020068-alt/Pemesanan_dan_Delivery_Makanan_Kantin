@@ -39,9 +39,13 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($users as $userData) {
+            $avatar = User::determineAvatarByName($userData['name']);
             User::updateOrCreate(
                 ['id' => $userData['id']],
-                array_merge($userData, ['password' => $defaultPassword])
+                array_merge($userData, [
+                    'password' => $defaultPassword,
+                    'avatar' => $avatar,
+                ])
             );
         }
 
