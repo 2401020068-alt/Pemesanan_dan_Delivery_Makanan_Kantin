@@ -17,9 +17,10 @@ class DriverController extends Controller
         $userId = session('user_id');
         if ($userId) {
             $user = User::find($userId);
-            if ($user) return $user;
+            if ($user && $user->role === 'driver') return $user;
         }
-        return auth()->user() ?? User::where('role', 'driver')->first();
+        return (auth()->check() && auth()->user()->role === 'driver' ? auth()->user() : null)
+            ?? User::where('role', 'driver')->first();
     }
 
     public function index()
@@ -120,9 +121,22 @@ class DriverController extends Controller
         $request->validate([
             'name' => 'required|string|max:100',
             'phone' => 'nullable|string',
+            'avatar_file' => 'nullable|image|max:2048',
+            'avatar_preset' => 'nullable|string',
         ]);
 
-        $driver->update($request->only('name', 'phone'));
+        $data = $request->only('name', 'phone');
+
+        if ($request->hasFile('avatar_file')) {
+            $path = $request->file('avatar_file')->store('avatars', 'public');
+            $data['avatar'] = '/storage/' . $path;
+        } elseif ($request->filled('avatar_preset')) {
+            $data['avatar'] = $request->input('avatar_preset');
+        } elseif ($driver->name !== $request->name && (empty($driver->getRawOriginal('avatar')) || str_contains($driver->getRawOriginal('avatar'), 'unsplash.com'))) {
+            $data['avatar'] = User::determineAvatarByName($request->name);
+        }
+
+        $driver->update($data);
         return back()->with('success', 'Profil driver berhasil disimpan.');
     }
 }
