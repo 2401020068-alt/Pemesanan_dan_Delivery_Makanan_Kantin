@@ -88,7 +88,7 @@ class AuthController extends Controller
             'role' => $request->role,
             'status' => 'active',
             'approval' => $request->role === 'seller' ? 'pending' : null,
-            'avatar' => 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=70',
+            'avatar' => User::determineAvatarByName($request->name),
             'password' => Hash::make($request->password),
         ]);
 
