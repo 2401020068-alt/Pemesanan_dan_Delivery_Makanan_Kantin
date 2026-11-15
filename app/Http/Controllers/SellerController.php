@@ -19,9 +19,11 @@ class SellerController extends Controller
         $userId = session('user_id');
         if ($userId) {
             $user = User::find($userId);
-            if ($user) return $user;
+            if ($user && $user->role === 'seller') return $user;
         }
-        return auth()->user() ?? User::where('role', 'seller')->first();
+        return (auth()->check() && auth()->user()->role === 'seller' ? auth()->user() : null)
+            ?? User::where('role', 'seller')->where('approval', 'approved')->first()
+            ?? User::where('role', 'seller')->first();
     }
 
     protected function getShop()
@@ -48,6 +50,9 @@ class SellerController extends Controller
 
     protected function checkApproval()
     {
+        if (auth()->check() && auth()->user()->role !== 'seller') {
+            return redirect('/' . auth()->user()->role)->with('info', 'Anda saat ini sedang login sebagai ' . ucfirst(auth()->user()->role) . '.');
+        }
         $seller = $this->getSeller();
         if ($seller && $seller->role === 'seller' && $seller->approval !== 'approved') {
             return redirect()->route('seller.pending');
@@ -152,7 +157,10 @@ class SellerController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        $newId = 'm' . (MenuItem::count() + 1);
+        $maxMenuId = MenuItem::all()->map(function ($m) {
+            return (int) preg_replace('/\D/', '', $m->id);
+        })->max() ?? 0;
+        $newId = 'm' . ($maxMenuId + 1);
         $imageUrl = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=70';
 
         if ($request->hasFile('image')) {
@@ -249,6 +257,9 @@ class SellerController extends Controller
 
     public function pending()
     {
+        if (auth()->check() && auth()->user()->role !== 'seller') {
+            return redirect('/' . auth()->user()->role)->with('info', 'Anda sedang login sebagai ' . ucfirst(auth()->user()->role) . '. Untuk melihat dashboard warung, silakan login dengan akun Penjual.');
+        }
         $seller = $this->getSeller();
         // Kalau sudah approved, langsung ke dashboard
         if ($seller && $seller->approval === 'approved') {
@@ -270,9 +281,22 @@ class SellerController extends Controller
         $request->validate([
             'name' => 'required|string|max:100',
             'phone' => 'nullable|string',
+            'avatar_file' => 'nullable|image|max:2048',
+            'avatar_preset' => 'nullable|string',
         ]);
 
-        $seller->update($request->only('name', 'phone'));
-        return back()->with('success', 'Profil penjual berhasil diperbarui.');
+        $data = $request->only('name', 'phone');
+
+        if ($request->hasFile('avatar_file')) {
+            $path = $request->file('avatar_file')->store('avatars', 'public');
+            $data['avatar'] = '/storage/' . $path;
+        } elseif ($request->filled('avatar_preset')) {
+            $data['avatar'] = $request->avatar_preset;
+        } elseif ($seller->name !== $request->name) {
+            $data['avatar'] = \App\Models\User::determineAvatarByName($request->name);
+        }
+
+        $seller->update($data);
+        return back()->with('success', 'Profil dan foto avatar penjual berhasil diperbarui!');
     }
 }
