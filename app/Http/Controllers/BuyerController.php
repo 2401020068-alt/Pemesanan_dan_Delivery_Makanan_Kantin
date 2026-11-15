@@ -20,9 +20,10 @@ class BuyerController extends Controller
         $userId = session('user_id');
         if ($userId) {
             $user = User::find($userId);
-            if ($user) return $user;
+            if ($user && $user->role === 'buyer') return $user;
         }
-        return auth()->user() ?? User::where('role', 'buyer')->first();
+        return (auth()->check() && auth()->user()->role === 'buyer' ? auth()->user() : null)
+            ?? User::where('role', 'buyer')->first();
     }
 
     public function index(Request $request)
@@ -394,9 +395,22 @@ class BuyerController extends Controller
             'name' => 'required|string|max:100',
             'phone' => 'nullable|string',
             'address' => 'nullable|string',
+            'avatar_file' => 'nullable|image|max:2048',
+            'avatar_preset' => 'nullable|string',
         ]);
 
-        $buyer->update($request->only('name', 'phone', 'address'));
+        $data = $request->only('name', 'phone', 'address');
+
+        if ($request->hasFile('avatar_file')) {
+            $path = $request->file('avatar_file')->store('avatars', 'public');
+            $data['avatar'] = '/storage/' . $path;
+        } elseif ($request->filled('avatar_preset')) {
+            $data['avatar'] = $request->input('avatar_preset');
+        } elseif ($buyer->name !== $request->name && (empty($buyer->getRawOriginal('avatar')) || str_contains($buyer->getRawOriginal('avatar'), 'unsplash.com'))) {
+            $data['avatar'] = User::determineAvatarByName($request->name);
+        }
+
+        $buyer->update($data);
         return back()->with('success', 'Profil pembeli berhasil diperbarui.');
     }
 }
