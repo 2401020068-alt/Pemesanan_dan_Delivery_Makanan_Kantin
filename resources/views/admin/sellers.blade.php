@@ -27,7 +27,7 @@
                     @forelse($sellers as $sel)
                         <tr class="hover:bg-[#FAFBF9] transition">
                             <td class="px-5 py-3.5 flex items-center gap-3">
-                                <img src="{{ $sel->avatar ?? 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=70' }}" class="w-9 h-9 rounded-full object-cover ring-2 ring-[#BFD4C7]/20">
+                                <img src="{{ asset(ltrim($sel->avatar, '/')) }}" class="w-9 h-9 rounded-full object-cover ring-2 ring-[#BFD4C7]/20 bg-[#FAFBF9]">
                                 <div>
                                     <span class="font-bold text-[#1A241E] block text-xs">{{ $sel->name }}</span>
                                     <span class="text-[10px] text-[#76847B] font-mono">{{ $sel->id }}</span>
