@@ -301,6 +301,19 @@
                         <span>Profil</span>
                     </a>
                 @elseif($currentRole === 'seller')
+                    @if($authUser && $authUser->role === 'seller' && $authUser->approval !== 'approved')
+                        <div class="p-3 mb-2 rounded-xl bg-amber-50/80 border border-amber-200/80 text-amber-900 text-xs">
+                            <div class="flex items-center gap-2 font-bold mb-1">
+                                <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                <span>Verifikasi Akun</span>
+                            </div>
+                            <p class="text-[11px] text-amber-700 leading-relaxed">Menu warung akan terbuka otomatis setelah disetujui admin.</p>
+                        </div>
+                        <a href="{{ route('seller.pending') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all bg-[#E3ECE6] text-[#1F3E2C]">
+                            <svg class="w-4 h-4 text-[#1F3E2C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span>Status Verifikasi</span>
+                        </a>
+                    @else
                     <a href="{{ route('seller.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('seller.index') ? 'bg-[#E3ECE6] text-[#1F3E2C] font-semibold' : 'text-[#4A584F] hover:bg-[#F1F5F2] hover:text-[#1A241E]' }}">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                         <span>Dashboard</span>
@@ -321,6 +334,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         <span>Profil</span>
                     </a>
+                    @endif
                 @elseif($currentRole === 'driver')
                     <a href="{{ route('driver.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('driver.index') ? 'bg-[#E3ECE6] text-[#1F3E2C] font-semibold' : 'text-[#4A584F] hover:bg-[#F1F5F2] hover:text-[#1A241E]' }}">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
@@ -403,7 +417,7 @@
 
                         <!-- User Pill Profile -->
                         <div class="flex items-center gap-2.5">
-                            <img src="{{ $authUser->avatar ?? 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=70' }}" alt="{{ $authUser->name }}" class="w-8 h-8 rounded-full object-cover ring-2 {{ $isEmeraldPage ? 'ring-emerald-400/40' : 'ring-[#BFD4C7]' }} shadow-xs">
+                            <img src="{{ asset(ltrim($authUser->avatar, '/')) }}" alt="{{ $authUser->name }}" class="w-8 h-8 rounded-full object-cover ring-2 {{ $isEmeraldPage ? 'ring-emerald-400/40' : 'ring-[#BFD4C7]' }} shadow-xs bg-[#FAFBF9]">
                             <div class="hidden sm:block text-left leading-none">
                                 <div class="text-xs font-bold {{ $isEmeraldPage ? 'text-white' : 'text-[#1A241E]' }} truncate max-w-[120px]">{{ $authUser->name }}</div>
                                 <span class="text-[10px] {{ $isEmeraldPage ? 'text-emerald-300' : 'text-[#76847B]' }} font-medium">{{ ['buyer' => 'Pembeli', 'seller' => 'Penjual', 'driver' => 'Kurir', 'admin' => 'Admin'][$authUser->role] ?? ucfirst($authUser->role) }}</span>
@@ -464,7 +478,13 @@
                         <span>Pesanan</span>
                     </a>
                 @elseif($currentRole === 'seller')
-                    <a href="{{ route('seller.index') }}" class="flex flex-col items-center gap-1 text-[10px] font-semibold {{ request()->routeIs('seller.index') ? 'text-[#1F3E2C]' : 'text-[#76847B]' }}">
+                    @if($authUser && $authUser->role === 'seller' && $authUser->approval !== 'approved')
+                        <a href="{{ route('seller.pending') }}" class="flex flex-col items-center gap-1 text-[10px] font-semibold text-[#1F3E2C]">
+                            <svg class="w-5 h-5 text-[#1F3E2C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <span>Verifikasi</span>
+                        </a>
+                    @else
+                        <a href="{{ route('seller.index') }}" class="flex flex-col items-center gap-1 text-[10px] font-semibold {{ request()->routeIs('seller.index') ? 'text-[#1F3E2C]' : 'text-[#76847B]' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                         <span>Dashboard</span>
                     </a>
@@ -480,6 +500,7 @@
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         <span>Profil</span>
                     </a>
+                    @endif
                 @elseif($currentRole === 'driver')
                     <a href="{{ route('driver.index') }}" class="flex flex-col items-center gap-1 text-[10px] font-semibold {{ request()->routeIs('driver.index') ? 'text-[#1F3E2C]' : 'text-[#76847B]' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
